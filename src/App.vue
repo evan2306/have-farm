@@ -1,13 +1,44 @@
 <script setup></script>
 
 <template>
-  <nav>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNav"
+        aria-controls="navbarNav"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Features</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Pricing</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled">Disabled</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <nav class="bg-mainred">
     <div class="top-nav d-flex justify-content-between container-lg">
-      <h2 class="mb-0 text-mainred fw-bold d-flex align-items-center">
-        <a href="#" class="text-decoration-none text-mainred d-block lh-base"
-          >饗農</a
-        >
-      </h2>
+      <h1 class="mb-0 text-mainred fw-bold">
+        <a href="#" class="logo text-decoration-none d-block lh-base"> 饗農 </a>
+      </h1>
       <ul class="list-unstyled d-flex mb-0 align-items-center">
         <li class="">
           <a href="#" class="navbtn d-block p-3 text-decoration-none fw-bold"
@@ -28,19 +59,12 @@
           <a
             href="#"
             class="navbtn d-block py-3 px-2 text-decoration-none fw-bold"
-            ><i class="material-icons d-block fs-5"> person </i></a
-          >
-        </li>
-        <li class="">
-          <a
-            href="#"
-            class="navbtn d-block py-3 px-2 text-decoration-none fw-bold"
             ><i class="material-icons d-block fs-5"> shopping_cart </i></a
           >
         </li>
       </ul>
     </div>
-    <div class="bottom-nav bg-mainred">
+    <!-- <div class="bottom-nav bg-mainred">
       <div class="d-flex justify-content-end container-lg py-2">
         <div class="input-group search-box">
           <label class="input-group-text bg-white" for="itemSearch">
@@ -63,8 +87,9 @@
           </button>
         </div>
       </div>
-    </div>
+    </div> -->
   </nav>
+
   <div class="banner">
     <div class="banner-text container-lg">
       <h1 class="text-mainred">饗農。<span class="text-mainorg">享</span>農</h1>
@@ -297,6 +322,7 @@
 
 <style lang="scss">
 * {
+  outline: 1px solid #000;
 }
 
 body {
@@ -305,21 +331,35 @@ body {
 }
 
 .navbtn {
-  color: #460303;
-
+  color: #fff;
   &:hover {
     transition: 0.2s;
     color: #fde47f;
   }
 }
 
+.logo {
+  background-image: url("./assets/images/logo.png");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: block;
+  width: 80px;
+  height: 80px;
+  display: block;
+  text-indent: 101%;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+// 橫幅
 .banner {
   background-image: url("./assets/images/bannerbanner (2).png");
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
   max-width: 100%;
-  height: calc(100vh - 110px);
+  height: calc(100vh - 80px);
 }
 
 .banner-text {
@@ -369,21 +409,26 @@ body {
     transition: 0.3s;
   }
 }
+
 .cart-select {
   background-color: #fbf9f3;
   padding-bottom: 64px;
 }
+
 .cart-card-img {
   max-width: 312px;
   height: auto;
   margin: 0;
 }
+
 .cart-select-group {
   padding-bottom: 40px;
 }
+
 .bottom-about {
   margin-bottom: 64px;
 }
+
 .about-bottom-top-img {
   display: block;
   max-width: 451px;
@@ -394,9 +439,11 @@ body {
   padding-top: 64px;
   padding-bottom: 64px;
 }
+
 .phone:hover {
   outline: 2px solid #fde47f;
 }
+
 .socialmedia img:hover {
   outline: 2px solid #fde47f;
 }
