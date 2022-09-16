@@ -1,0 +1,28 @@
+@mixin xl{
+  @media (max-width:1200px){
+    @content;
+  }
+}
+
+@mixin lg{
+  @media (max-width:992px){
+    @content;
+  }
+}
+@mixin md{
+  @media (max-width:768px){
+    @content;
+  }
+}
+@mixin sm{
+  @media (max-width:576px){
+    @content;
+  }
+}
+
+@mixin border-end-radius($radius: $border-radius) {
+  @if $enable-rounded {
+    border-top-right-radius: valid-radius($radius);
+    border-bottom-right-radius: valid-radius($radius);
+  }
+}
