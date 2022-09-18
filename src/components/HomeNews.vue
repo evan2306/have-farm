@@ -37,8 +37,8 @@ const newsData = reactive([
         最新消息
       </h2>
       <ul class="news list-unstyled col-xl-8 col-12 mb-0">
-        <li class="mb-32">
-          <div class="news-box mb-4" v-for="news in newsData" :key="news.title">
+        <li class="mb-32" v-for="news in newsData" :key="news.title">
+          <div class="news-box mb-4">
             <div
               class="news-top d-flex text-center text-mainred align-items-center"
             >
@@ -53,10 +53,11 @@ const newsData = reactive([
               <p class="lh-lg text-mainred m-0 news-text fw-semibold">
                 {{ news.describe }}
               </p>
-              <button type="button" class="news-btn fw-bolder ms-lg-2">
-                more
-              </button>
-              <div class="new-"></div>
+              <router-link
+                to="/news"
+                class="news-btn fw-bolder ms-lg-2 text-decoration-none px-4 py-1"
+                >more</router-link
+              >
             </div>
           </div>
           <div class="news-border-bottom"></div>
