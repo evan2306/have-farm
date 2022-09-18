@@ -109,7 +109,7 @@ const newsData = reactive([
 </template>
 <style lang="scss" scoped>
 * {
-  outline: 1px solid #000;
+  // outline: 1px solid #000;
 }
 
 .bread-mt {
