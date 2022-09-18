@@ -8,7 +8,7 @@
         精選熱銷
       </h2>
       <div class="row row-cols-1 row-cols-md-3 gx-md-24 gx-0 gy-24 gy-lg-0">
-        <div class="col" v-for="(item, idx) in 3" :key="idx">
+        <div class="col">
           <div class="card border-0 rounded-16">
             <div class="card-top w-100 pt-16 px-22">
               <img
@@ -22,6 +22,56 @@
               <h5 class="mb-0 fs-16 lh-base fw-bold">彗星牧場</h5>
               <p class="fs-20 lh-base mb-8 fw-bold">初番鮮乳(1830ml)</p>
               <p class="fs-20 lh-base mb-8 fw-bold">NT$160</p>
+            </div>
+            <div class="card-footer border-0 p-0 rounded-bottom-16">
+              <button
+                type="button"
+                class="w-100 border-0 py-16 fs-16 lh-base rounded-bottom-16 fw-bold goitem-btn"
+              >
+                立即購買
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card border-0 rounded-16">
+            <div class="card-top w-100 pt-16 px-22">
+              <img
+                src="@/assets/images/rice.png"
+                class="cart-card-img mx-auto d-block img-fluid"
+                alt="商品圖片"
+              />
+            </div>
+
+            <div class="card-body mt-8 px-22 py-0 text-mainred">
+              <h5 class="mb-0 fs-16 lh-base fw-bold">樂下土</h5>
+              <p class="fs-20 lh-base mb-8 fw-bold">台東22年二期稻新米(2kg)</p>
+              <p class="fs-20 lh-base mb-8 fw-bold">NT$200</p>
+            </div>
+            <div class="card-footer border-0 p-0 rounded-bottom-16">
+              <button
+                type="button"
+                class="w-100 border-0 py-16 fs-16 lh-base rounded-bottom-16 fw-bold goitem-btn"
+              >
+                立即購買
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card border-0 rounded-16">
+            <div class="card-top w-100 pt-16 px-22">
+              <img
+                src="@/assets/images/hotdog.png"
+                class="cart-card-img mx-auto d-block img-fluid"
+                alt="商品圖片"
+              />
+            </div>
+
+            <div class="card-body mt-8 px-22 py-0 text-mainred">
+              <h5 class="mb-0 fs-16 lh-base fw-bold">廚畜</h5>
+              <p class="fs-20 lh-base mb-8 fw-bold">黑豬肉香腸(6條)</p>
+              <p class="fs-20 lh-base mb-8 fw-bold">NT$120</p>
             </div>
             <div class="card-footer border-0 p-0 rounded-bottom-16">
               <button

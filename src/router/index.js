@@ -1,8 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/HomeView.vue";
-import AboutFarm from "../views/AboutHavefarm.vue";
-import FarmMap from "../views/FarmMap.vue";
-import FarmShop from "../views/FarmShop.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -14,18 +11,23 @@ const router = createRouter({
     },
     {
       path: "/about",
-      name: "AboutFarm",
-      component: AboutFarm,
+      name: "關於饗農",
+      component: () => import("../views/AboutHavefarm.vue"),
+    },
+    {
+      path: "/news",
+      name: "最新消息",
+      component: () => import("../views/FarmNews.vue"),
     },
     {
       path: "/farmmap",
-      name: "FarmMap",
-      component: FarmMap,
+      name: "饗農地圖",
+      component: () => import("../views/FarmMap.vue"),
     },
     {
       path: "/farmshop",
-      name: "FarmShop",
-      component: FarmShop,
+      name: "想農商城",
+      component: () => import("../views/FarmShop.vue"),
     },
   ],
 });

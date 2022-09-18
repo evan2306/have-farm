@@ -30,6 +30,11 @@
               >
             </li>
             <li class="nav-item">
+              <router-link to="/news" class="nav-link navbtn text-center">
+                最新消息</router-link
+              >
+            </li>
+            <li class="nav-item">
               <router-link to="/farmmap" class="nav-link navbtn text-center"
                 >饗農地圖</router-link
               >

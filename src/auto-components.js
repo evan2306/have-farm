@@ -7,6 +7,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    BreadCrumb: typeof import('./components/BreadCrumb.vue')['default']
     HomeAbout: typeof import('./components/HomeAbout.vue')['default']
     HomeBanner: typeof import('./components/HomeBanner.vue')['default']
     HomeHotItem: typeof import('./components/HomeHotItem.vue')['default']
