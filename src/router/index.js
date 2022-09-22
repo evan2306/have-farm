@@ -26,7 +26,7 @@ const router = createRouter({
     },
     {
       path: "/farmshop",
-      name: "想農商城",
+      name: "響農商城",
       component: () => import("../views/FarmShop.vue"),
     },
   ],

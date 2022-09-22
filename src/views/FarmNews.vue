@@ -108,10 +108,6 @@ const newsData = reactive([
   </div>
 </template>
 <style lang="scss" scoped>
-* {
-  // outline: 1px solid #000;
-}
-
 .bread-mt {
   margin-top: 82px;
   @include lg {
