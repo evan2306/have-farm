@@ -83,6 +83,7 @@ const seasonItem = reactive([
 ]);
 </script>
 <template>
+  <LayoutNavbar />
   <div class="bread-mt container-lg pt-16">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
@@ -196,6 +197,7 @@ const seasonItem = reactive([
       </ul>
     </nav>
   </section>
+  <LayoutFooter />
 </template>
 <style lang="scss" scoped>
 * {

@@ -5,12 +5,14 @@ import HomeHotItem from "../components/HomeHotItem.vue";
 import HomeAbout from "../components/HomeAbout.vue";
 </script>
 <template>
+  <LayoutNavbar />
   <HomeBanner />
   <HomeNews />
   <HomeHotItem />
   <HomeSeasonItem />
   <HomeAbout />
   <HomeSubscrip />
+  <LayoutFooter />
 </template>
 
 <style lang="scss" scoped></style>

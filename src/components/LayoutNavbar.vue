@@ -25,22 +25,22 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto gap-24">
             <li class="nav-item">
-              <router-link to="/about" class="nav-link navbtn text-center">
+              <router-link to="about" class="nav-link navbtn text-center">
                 關於饗農</router-link
               >
             </li>
             <li class="nav-item">
-              <router-link to="/news" class="nav-link navbtn text-center">
+              <router-link to="news" class="nav-link navbtn text-center">
                 最新消息</router-link
               >
             </li>
             <li class="nav-item">
-              <router-link to="/farmmap" class="nav-link navbtn text-center"
+              <router-link to="farmmap" class="nav-link navbtn text-center"
                 >饗農地圖</router-link
               >
             </li>
             <li class="nav-item">
-              <router-link to="/farmshop" class="nav-link navbtn text-center"
+              <router-link to="farmshop" class="nav-link navbtn text-center"
                 >響農商城</router-link
               >
             </li>
@@ -76,6 +76,7 @@
   overflow: hidden;
   white-space: nowrap;
   transition: 0.2s;
+
   &:hover {
     background-image: url("@/assets/images/logo-dark.png");
     transition: 0.2s;
@@ -88,6 +89,7 @@
   font-weight: 600;
   transition: 0.2s;
   position: relative;
+
   @include lg {
     font-size: 24px;
     border-bottom: 1px solid #4603039a;
@@ -104,14 +106,30 @@
     background-color: #460303;
     transition: 0.3s;
   }
-  &:hover {
-    transition: 0.2s;
+  &.router-link-active {
     color: #fde47f;
     transform: translate(0, -3px);
+
     &::before {
       width: 100%;
       transition: 0.3s;
     }
+
+    @include lg {
+      transform: none;
+    }
+  }
+
+  &:hover {
+    transition: 0.2s;
+    color: #fde47f;
+    transform: translate(0, -3px);
+
+    &::before {
+      width: 100%;
+      transition: 0.3s;
+    }
+
     @include lg {
       transform: none;
     }
@@ -125,6 +143,7 @@
   padding-top: 1px;
   background-color: #460303;
 }
+
 // 三明治按鈕
 .navhamburgerbtn {
   border: 4px solid #fde47f00;

@@ -1,9 +1,9 @@
-<script setup></script>
+<script setup>
+console.log(import.meta.env.VITE_TEST_NAME);
+</script>
 
 <template>
-  <LayoutNavbar />
-  <router-view></router-view>
-  <LayoutFooter />
+  <router-view> </router-view>
 </template>
 
 <style lang="scss">
@@ -14,5 +14,8 @@
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
     "Microsoft JhengHei", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+.router-link-active {
+  color: aqua;
 }
 </style>

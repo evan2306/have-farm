@@ -1,5 +1,6 @@
 <script></script>
 <template>
+  <LayoutNavbar />
   <div class="bread-mt container-lg pt-16">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
@@ -87,6 +88,7 @@
       </div>
     </div>
   </section>
+  <LayoutFooter />
 </template>
 <style lang="scss" scoped>
 .bread-mt {
@@ -141,5 +143,8 @@
   max-width: 100%;
   background-color: rgba(0, 0, 0, 0.247);
   background-blend-mode: multiply;
+}
+.router-link-active {
+  color: aqua;
 }
 </style>
