@@ -1,4 +1,4 @@
-<script></script>
+<script setup></script>
 <template>
   <main class="bg-maingray pt-48 pb-64">
     <section class="container-lg">

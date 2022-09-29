@@ -1,4 +1,5 @@
 <script setup>
+import { reactive } from "vue";
 const newsData = reactive([
   {
     title: "饗農安心購",
@@ -35,7 +36,6 @@ const newsData = reactive([
 ]);
 </script>
 <template>
-  <LayoutNavbar />
   <div class="bread-mt container-lg pt-16">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
@@ -107,7 +107,6 @@ const newsData = reactive([
       </div>
     </div>
   </div>
-  <LayoutFooter />
 </template>
 <style lang="scss" scoped>
 .bread-mt {

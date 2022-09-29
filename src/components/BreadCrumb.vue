@@ -1,9 +1,4 @@
-<script setup>
-// const route = useRoute();
-// onMounted(() => {
-//   console.log("route", route);
-// });
-</script>
+<script setup></script>
 <template>
   <div class="bread-mt container-lg">
     <nav aria-label="breadcrumb">

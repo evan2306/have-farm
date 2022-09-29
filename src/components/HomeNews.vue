@@ -1,4 +1,6 @@
 <script setup>
+import { reactive } from "vue";
+
 const newsData = reactive([
   {
     title: "饗農安心購",

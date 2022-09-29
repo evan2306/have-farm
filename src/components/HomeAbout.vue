@@ -1,4 +1,4 @@
-<script></script>
+<script setup></script>
 <template>
   <footer class="bg-maingray">
     <section class="container-lg py-64">

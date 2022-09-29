@@ -1,8 +1,5 @@
-<script>
-export default {};
-</script>
+<script setup></script>
 <template>
-  <LayoutNavbar />
   <div class="bread-mt container-lg pt-16">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
@@ -63,7 +60,6 @@ export default {};
       </div>
     </div>
   </section>
-  <LayoutFooter />
 </template>
 <style lang="scss" scoped>
 .bread-mt {

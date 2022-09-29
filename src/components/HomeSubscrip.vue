@@ -1,4 +1,4 @@
-<script></script>
+<script setup></script>
 <template>
   <section class="container-lg py-48 py-md-64">
     <h2 class="text-center fs-24 lh-base text-mainred fw-bold mb-8 mb-md-16">

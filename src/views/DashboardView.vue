@@ -1,6 +1,4 @@
-<script>
-export default {};
-</script>
+<script setup></script>
 <template>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">

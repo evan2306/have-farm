@@ -33,6 +33,11 @@ const router = createRouter({
           name: "響農商城",
           component: () => import("../views/FarmShop.vue"),
         },
+        {
+          path: "farmcart",
+          name: "購物車",
+          component: () => import("../views/FarmCart.vue"),
+        },
       ],
     },
     {

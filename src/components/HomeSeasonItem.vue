@@ -1,4 +1,6 @@
 <script setup>
+import { reactive } from "vue";
+
 const seasonItem = reactive([
   {
     title: "屏東高級玉荷包",

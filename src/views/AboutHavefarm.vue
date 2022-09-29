@@ -1,6 +1,5 @@
-<script></script>
+<script setup></script>
 <template>
-  <LayoutNavbar />
   <div class="bread-mt container-lg pt-16">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
@@ -82,13 +81,12 @@
         與小農直接合作，配合專業冷藏冷凍物流<br />把你平常拿不到的新鮮，直接寄給你
       </h4>
       <div class="w-100 d-flex justify-content-center mt-64">
-        <router-link to="/famrshop" class="goshop-btn btn py-8 px-48 fw-bold"
+        <router-link to="/farmshop" class="goshop-btn btn py-8 px-48 fw-bold"
           >前往商城</router-link
         >
       </div>
     </div>
   </section>
-  <LayoutFooter />
 </template>
 <style lang="scss" scoped>
 .bread-mt {
@@ -143,8 +141,5 @@
   max-width: 100%;
   background-color: rgba(0, 0, 0, 0.247);
   background-blend-mode: multiply;
-}
-.router-link-active {
-  color: aqua;
 }
 </style>

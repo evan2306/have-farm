@@ -2,23 +2,13 @@ import { fileURLToPath, URL } from "node:url";
 
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
-import AutoImport from "unplugin-auto-import/vite";
-import Components from "unplugin-vue-components/vite";
+
+const INVALID_CHAR_REGEX = /[\x00-\x1F\x7F<>*#"{}|^[\]`;?:&=+$,]/g;
+const DRIVE_LETTER_REGEX = /^[a-z]:/i;
 // https://vitejs.dev/config/
 export default defineConfig({
   base: "/have-farm/",
-  plugins: [
-    vue(),
-    AutoImport({
-      imports: ["vue", "vue-router", "pinia"],
-      dts: "src/auto-imports.js",
-    }),
-    Components({
-      extensions: ["vue"],
-      include: [/\.vue$/, /\.vue\?vue/],
-      dts: "src/auto-components.js", // 從 `./src/components/` 路徑查找
-    }),
-  ],
+  plugins: [vue()],
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
@@ -28,6 +18,21 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         additionalData: `@import "@/assets/style/helpers/mixin.scss";`,
+      },
+    },
+  },
+  build: {
+    rollupOptions: {
+      output: {
+        // https://github.com/rollup/rollup/blob/master/src/utils/sanitizeFileName.ts
+        sanitizeFileName(fileName) {
+          const match = DRIVE_LETTER_REGEX.exec(fileName);
+          const driveLetter = match ? match[0] : "";
+          return (
+            driveLetter +
+            fileName.slice(driveLetter.length).replace(INVALID_CHAR_REGEX, "")
+          );
+        },
       },
     },
   },

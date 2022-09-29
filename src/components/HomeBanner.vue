@@ -1,4 +1,4 @@
-<script></script>
+<script setup></script>
 <template>
   <div class="banner">
     <div class="h-100 container-lg">

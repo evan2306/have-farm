@@ -1,5 +1,5 @@
 <script setup>
-console.log(import.meta.env.VITE_TEST_NAME);
+console.log(import.meta.env.BASE_URL);
 </script>
 
 <template>
@@ -14,8 +14,5 @@ console.log(import.meta.env.VITE_TEST_NAME);
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
     "Microsoft JhengHei", Roboto, "Helvetica Neue", Arial, sans-serif;
-}
-.router-link-active {
-  color: aqua;
 }
 </style>
