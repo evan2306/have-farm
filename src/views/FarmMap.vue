@@ -53,7 +53,13 @@
       </div>
       <div class="col-12 col-md-4">
         <div
-          class="d-flex h-100 justify-content-center align-items-center border-2 border"
+          class="
+            d-flex
+            h-100
+            justify-content-center
+            align-items-center
+            border-2 border
+          "
         >
           <p>請點選右側地圖圖標，或篩選後再進行點選</p>
         </div>

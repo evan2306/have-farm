@@ -1,38 +1,38 @@
 <script setup>
-import { reactive } from "vue";
+import { reactive } from 'vue';
 
 const seasonItem = reactive([
   {
-    title: "屏東高級玉荷包",
-    farm: "荔貴妃",
+    title: '屏東高級玉荷包',
+    farm: '荔貴妃',
     price: 285,
-    unit: "每台斤",
+    unit: '每台斤',
     imgUrl:
-      "https://github.com/piskesocute/have-farm/blob/main/src/assets/images/lichi.png?raw=true",
+      'https://github.com/piskesocute/have-farm/blob/main/src/assets/images/lichi.png?raw=true',
   },
   {
-    title: "宜蘭特選三星蔥",
-    farm: "蔥動",
+    title: '宜蘭特選三星蔥',
+    farm: '蔥動',
     price: 99,
-    unit: "200g",
+    unit: '200g',
     imgUrl:
-      "https://github.com/piskesocute/have-farm/blob/main/src/assets/images/green%20onion.jpg?raw=true",
+      'https://github.com/piskesocute/have-farm/blob/main/src/assets/images/green%20onion.jpg?raw=true',
   },
   {
-    title: "台農22號蜜香",
-    farm: "與鳳有約",
+    title: '台農22號蜜香',
+    farm: '與鳳有約',
     price: 150,
-    unit: "顆",
+    unit: '顆',
     imgUrl:
-      "https://github.com/piskesocute/have-farm/blob/main/src/assets/images/pineapple.jpg?raw=true",
+      'https://github.com/piskesocute/have-farm/blob/main/src/assets/images/pineapple.jpg?raw=true',
   },
   {
-    title: "極品綠竹筍",
-    farm: "心田山",
+    title: '極品綠竹筍',
+    farm: '心田山',
     price: 120,
-    unit: "每台斤",
+    unit: '每台斤',
     imgUrl:
-      "https://github.com/piskesocute/have-farm/blob/main/src/assets/images/bamboo%20shoots.png?raw=true",
+      'https://github.com/piskesocute/have-farm/blob/main/src/assets/images/bamboo%20shoots.png?raw=true',
   },
 ]);
 </script>
@@ -40,7 +40,15 @@ const seasonItem = reactive([
   <main class="pt-48 pb-64">
     <section class="container-lg">
       <h2
-        class="w-100 text-center fs-32 lh-base fw-bolder text-mainred mb-24 mb-lg-32"
+        class="
+          w-100
+          text-center
+          fs-32
+          lh-base
+          fw-bolder
+          text-mainred
+          mb-24 mb-lg-32
+        "
       >
         季節限定
       </h2>
@@ -65,7 +73,16 @@ const seasonItem = reactive([
             <div class="card-footer border-0 p-0 rounded-bottom-16">
               <button
                 type="button"
-                class="w-100 border-0 py-16 fs-16 lh-base rounded-bottom-16 fw-bold goshop-btn"
+                class="
+                  w-100
+                  border-0
+                  py-16
+                  fs-16
+                  lh-base
+                  rounded-bottom-16
+                  fw-bold
+                  goshop-btn
+                "
               >
                 立即購買
               </button>

@@ -1,6 +1,6 @@
 <script setup>
-import LayoutNavbar from "../components/LayoutNavbar.vue";
-import LayoutFooter from "../components/LayoutFooter.vue";
+import LayoutNavbar from '@/components/LayoutNavbar.vue';
+import LayoutFooter from '@/components/LayoutFooter.vue';
 </script>
 <template>
   <LayoutNavbar />

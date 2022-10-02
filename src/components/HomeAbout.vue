@@ -11,7 +11,13 @@
           />
         </div>
         <div
-          class="col-12 col-sm-6 col-lg-3 d-flex justify-content-start align-items-center mt-8 mt-md-0"
+          class="
+            col-12 col-sm-6 col-lg-3
+            d-flex
+            justify-content-start
+            align-items-center
+            mt-8 mt-md-0
+          "
         >
           <p class="fs-32 fs-md-24 lh-base fw-bold text-mainred">
             洄游青農不孤單!!<br />與在地小農深入合作
@@ -23,7 +29,14 @@
           <img class="img-fluid" src="@/assets/images/cow.png" alt="farm.png" />
         </div>
         <div
-          class="col-12 col-sm-6 col-lg-3 mt-8 mt-md-0 offset-lg-2 d-flex justify-content-start justify-content-sm-end align-items-center"
+          class="
+            col-12 col-sm-6 col-lg-3
+            mt-8 mt-md-0
+            offset-lg-2
+            d-flex
+            justify-content-start justify-content-sm-end
+            align-items-center
+          "
         >
           <p class="fs-32 fs-md-24 lh-base fw-bold text-mainred">
             為你的食安把關<br />請饗用來自青農的美味

@@ -2,7 +2,13 @@
 <template>
   <div class="containe-lg">
     <nav
-      class="navbar navbar-expand-lg navbar-light bg-light border-5 border-bottom border-mainred py-4 fixed-top"
+      class="
+        navbar navbar-expand-lg navbar-light
+        bg-light
+        border-5 border-bottom border-mainred
+        py-4
+        fixed-top
+      "
     >
       <div class="container-lg">
         <h1 class="mb-0">
@@ -47,7 +53,15 @@
             <li class="nav-item">
               <router-link
                 to="/farmcart"
-                class="nav-link navbtn d-flex justify-content-center align-items-center d-lg-block gap-2 gap-lg-0"
+                class="
+                  nav-link
+                  navbtn
+                  d-flex
+                  justify-content-center
+                  align-items-center
+                  d-lg-block
+                  gap-2 gap-lg-0
+                "
               >
                 <i class="material-icons align-middle fs-5"> shopping_cart </i>
 
@@ -64,7 +78,7 @@
 <style lang="scss" scoped>
 // logo h1樣式
 .logo {
-  background-image: url("@/assets/images/logo-light.png");
+  background-image: url('@/assets/images/logo-light.png');
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -78,7 +92,7 @@
   transition: 0.2s;
 
   &:hover {
-    background-image: url("@/assets/images/logo-dark.png");
+    background-image: url('@/assets/images/logo-dark.png');
     transition: 0.2s;
   }
 }
@@ -97,7 +111,7 @@
 
   &::before {
     position: absolute;
-    content: "";
+    content: '';
     bottom: 0;
     left: 50%;
     transform: translate(-50%, 0);

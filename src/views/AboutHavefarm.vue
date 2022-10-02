@@ -13,7 +13,13 @@
       <div class="row mt-48 justify-content-center">
         <div class="col-12 col-md-5 mt-16 mt-md-0">
           <div
-            class="h-100 d-flex justify-content-center align-items-center rounded-16"
+            class="
+              h-100
+              d-flex
+              justify-content-center
+              align-items-center
+              rounded-16
+            "
           >
             <img
               class="img-fluid rounded-16"
@@ -134,7 +140,7 @@
   }
 }
 .about-footer {
-  background-image: url("../assets/images/about-footer-bg.png");
+  background-image: url('../assets/images/about-footer-bg.png');
   background-position: center center;
   background-size: cover;
   background-repeat: no-repeat;

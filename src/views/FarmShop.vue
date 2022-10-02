@@ -1,86 +1,86 @@
 <script setup>
-import { reactive } from "vue";
+import { reactive } from 'vue';
 
 const seasonItem = reactive([
   {
     season: true,
     hotItem: false,
-    title: "屏東高級玉荷包",
-    farm: "荔貴妃",
+    title: '屏東高級玉荷包',
+    farm: '荔貴妃',
     price: 285,
-    unit: "每台斤",
+    unit: '每台斤',
     imgUrl:
-      "https://github.com/piskesocute/have-farm/blob/main/src/assets/images/lichi.png?raw=true",
+      'https://github.com/piskesocute/have-farm/blob/main/src/assets/images/lichi.png?raw=true',
   },
   {
     season: true,
     hotItem: false,
-    title: "宜蘭特選三星蔥",
-    farm: "蔥動",
+    title: '宜蘭特選三星蔥',
+    farm: '蔥動',
     price: 99,
-    unit: "200g",
+    unit: '200g',
     imgUrl:
-      "https://github.com/piskesocute/have-farm/blob/main/src/assets/images/green%20onion.jpg?raw=true",
+      'https://github.com/piskesocute/have-farm/blob/main/src/assets/images/green%20onion.jpg?raw=true',
   },
   {
     season: true,
     hotItem: false,
-    title: "台農22號蜜香",
-    farm: "與鳳有約",
+    title: '台農22號蜜香',
+    farm: '與鳳有約',
     price: 150,
-    unit: "顆",
+    unit: '顆',
     imgUrl:
-      "https://github.com/piskesocute/have-farm/blob/main/src/assets/images/pineapple.jpg?raw=true",
+      'https://github.com/piskesocute/have-farm/blob/main/src/assets/images/pineapple.jpg?raw=true',
   },
   {
     season: true,
     hotItem: false,
-    title: "極品綠竹筍",
-    farm: "心田山",
+    title: '極品綠竹筍',
+    farm: '心田山',
     price: 120,
-    unit: "每台斤",
+    unit: '每台斤',
     imgUrl:
-      "https://github.com/piskesocute/have-farm/blob/main/src/assets/images/bamboo%20shoots.png?raw=true",
+      'https://github.com/piskesocute/have-farm/blob/main/src/assets/images/bamboo%20shoots.png?raw=true',
   },
   {
     season: false,
     hotItem: true,
-    title: "HTST 高溫殺菌鮮乳",
-    farm: "彗星牧場",
+    title: 'HTST 高溫殺菌鮮乳',
+    farm: '彗星牧場',
     price: 120,
-    unit: "1850ml",
+    unit: '1850ml',
     imgUrl:
-      "https://github.com/piskesocute/have-farm/blob/main/src/assets/images/milk.png?raw=true",
+      'https://github.com/piskesocute/have-farm/blob/main/src/assets/images/milk.png?raw=true',
   },
   {
     season: false,
     hotItem: true,
-    title: "台東22年二期稻新米",
-    farm: "樂下土",
+    title: '台東22年二期稻新米',
+    farm: '樂下土',
     price: 200,
-    unit: "2KG",
+    unit: '2KG',
     imgUrl:
-      "https://github.com/piskesocute/have-farm/blob/main/src/assets/images/rice.png?raw=true",
+      'https://github.com/piskesocute/have-farm/blob/main/src/assets/images/rice.png?raw=true',
   },
   {
     season: false,
     hotItem: false,
-    title: "伊比利豬德式香腸",
-    farm: "廚畜",
+    title: '伊比利豬德式香腸',
+    farm: '廚畜',
     price: 150,
-    unit: "4條",
+    unit: '4條',
     imgUrl:
-      "https://github.com/piskesocute/have-farm/blob/main/src/assets/images/hotdog.png?raw=true",
+      'https://github.com/piskesocute/have-farm/blob/main/src/assets/images/hotdog.png?raw=true',
   },
   {
     season: false,
     hotItem: false,
-    title: "黑豬肉香腸",
-    farm: "廚畜",
+    title: '黑豬肉香腸',
+    farm: '廚畜',
     price: 200,
-    unit: "6條",
+    unit: '6條',
     imgUrl:
-      "https://github.com/piskesocute/have-farm/blob/main/src/assets/images/sausage.png?raw=true",
+      'https://github.com/piskesocute/have-farm/blob/main/src/assets/images/sausage.png?raw=true',
   },
 ]);
 </script>
@@ -163,7 +163,17 @@ const seasonItem = reactive([
             <div class="card-footer border-0 p-0 rounded-bottom-16">
               <button
                 type="button"
-                class="w-100 border-0 py-16 fs-16 lh-base rounded-bottom-16 fw-bold goshop-btn stretched-link"
+                class="
+                  w-100
+                  border-0
+                  py-16
+                  fs-16
+                  lh-base
+                  rounded-bottom-16
+                  fw-bold
+                  goshop-btn
+                  stretched-link
+                "
               >
                 立即購買
               </button>
@@ -200,9 +210,6 @@ const seasonItem = reactive([
   </section>
 </template>
 <style lang="scss" scoped>
-* {
-  // outline: 1px solid #000;
-}
 .bread-mt {
   margin-top: 82px;
   @include lg {

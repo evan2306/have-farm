@@ -3,7 +3,15 @@
   <main class="bg-maingray pt-48 pb-64">
     <section class="container-lg">
       <h2
-        class="w-100 text-center fs-32 lh-base fw-bolder text-mainred mb-24 mb-lg-32"
+        class="
+          w-100
+          text-center
+          fs-32
+          lh-base
+          fw-bolder
+          text-mainred
+          mb-24 mb-lg-32
+        "
       >
         精選熱銷
       </h2>
@@ -26,7 +34,16 @@
             <div class="card-footer border-0 p-0 rounded-bottom-16">
               <button
                 type="button"
-                class="w-100 border-0 py-16 fs-16 lh-base rounded-bottom-16 fw-bold goitem-btn"
+                class="
+                  w-100
+                  border-0
+                  py-16
+                  fs-16
+                  lh-base
+                  rounded-bottom-16
+                  fw-bold
+                  goitem-btn
+                "
               >
                 立即購買
               </button>
@@ -51,7 +68,16 @@
             <div class="card-footer border-0 p-0 rounded-bottom-16">
               <button
                 type="button"
-                class="w-100 border-0 py-16 fs-16 lh-base rounded-bottom-16 fw-bold goitem-btn"
+                class="
+                  w-100
+                  border-0
+                  py-16
+                  fs-16
+                  lh-base
+                  rounded-bottom-16
+                  fw-bold
+                  goitem-btn
+                "
               >
                 立即購買
               </button>
@@ -76,7 +102,16 @@
             <div class="card-footer border-0 p-0 rounded-bottom-16">
               <button
                 type="button"
-                class="w-100 border-0 py-16 fs-16 lh-base rounded-bottom-16 fw-bold goitem-btn"
+                class="
+                  w-100
+                  border-0
+                  py-16
+                  fs-16
+                  lh-base
+                  rounded-bottom-16
+                  fw-bold
+                  goitem-btn
+                "
               >
                 立即購買
               </button>

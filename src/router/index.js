@@ -1,49 +1,54 @@
-import { createRouter, createWebHistory } from "vue-router";
+import { createRouter, createWebHistory } from 'vue-router';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: "/",
-      name: "Home",
-      component: () => import("../views/FrontView.vue"),
+      path: '/',
+      name: 'Home',
+      component: () => import('../views/FrontView.vue'),
       children: [
         {
-          path: "",
-          name: "首頁",
-          component: () => import("../views/HomeView.vue"),
+          path: '',
+          name: '首頁',
+          component: () => import('../views/HomeView.vue'),
         },
         {
-          path: "about",
-          name: "關於饗農",
-          component: () => import("../views/AboutHavefarm.vue"),
+          path: 'about',
+          name: '關於饗農',
+          component: () => import('../views/AboutHavefarm.vue'),
         },
         {
-          path: "news",
-          name: "最新消息",
-          component: () => import("../views/FarmNews.vue"),
+          path: 'news',
+          name: '最新消息',
+          component: () => import('../views/FarmNews.vue'),
         },
         {
-          path: "farmmap",
-          name: "饗農地圖",
-          component: () => import("../views/FarmMap.vue"),
+          path: 'farmmap',
+          name: '饗農地圖',
+          component: () => import('../views/FarmMap.vue'),
         },
         {
-          path: "farmshop",
-          name: "響農商城",
-          component: () => import("../views/FarmShop.vue"),
+          path: 'farmshop',
+          name: '響農商城',
+          component: () => import('../views/FarmShop.vue'),
         },
         {
-          path: "farmcart",
-          name: "購物車",
-          component: () => import("../views/FarmCart.vue"),
+          path: 'farmcart',
+          name: '購物車',
+          component: () => import('../views/FarmCart.vue'),
         },
       ],
     },
     {
-      path: "/admin",
-      name: "後台",
-      component: () => import("../views/DashboardView.vue"),
+      path: '/admin',
+      component: () => import('../views/DashboardView.vue'),
+      children: [
+        {
+          path: 'adminproduct',
+          component: () => import('../views/AdminProductEdit.vue'),
+        },
+      ],
     },
   ],
 });
