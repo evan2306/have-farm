@@ -9,7 +9,8 @@ const INVALID_CHAR_REGEX = /[\x00-\x1F\x7F<>*#"{}|^[\]`;?:&=+$,]/g;
 const DRIVE_LETTER_REGEX = /^[a-z]:/i;
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/have-farm/',
+  base: process.env.NODE_ENV === 'production' ? '/have-farm/' : '/',
+  // base: '/have-farm/',
   plugins: [vue(),
   ],
   resolve: {

@@ -1,5 +1,5 @@
 <script setup>
-console.log(import.meta.env.BASE_URL);
+console.log('環境變數=>', import.meta.env);
 </script>
 
 <template>
@@ -12,7 +12,7 @@ console.log(import.meta.env.BASE_URL);
 // }
 // 全站字體
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-    "Microsoft JhengHei", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    'Microsoft JhengHei', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 </style>

@@ -1,4 +1,6 @@
-<script setup></script>
+<script setup>
+import LayoutFooter from '@/components/LayoutFooter.vue';
+</script>
 <template>
   <div class="bread-mt container-lg pt-16">
     <nav aria-label="breadcrumb">
@@ -66,6 +68,7 @@
       </div>
     </div>
   </section>
+  <LayoutFooter />
 </template>
 <style lang="scss" scoped>
 .bread-mt {

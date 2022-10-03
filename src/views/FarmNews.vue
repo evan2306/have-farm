@@ -1,4 +1,5 @@
 <script setup>
+import LayoutFooter from '@/components/LayoutFooter.vue';
 import { reactive } from 'vue';
 
 const newsData = reactive([
@@ -152,6 +153,7 @@ const newsData = reactive([
       </div>
     </div>
   </div>
+  <LayoutFooter />
 </template>
 <style lang="scss" scoped>
 .bread-mt {

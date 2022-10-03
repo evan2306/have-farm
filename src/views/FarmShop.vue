@@ -1,6 +1,27 @@
 <script setup>
-import { reactive } from 'vue';
+import LayoutFooter from '@/components/LayoutFooter.vue';
+import axios from 'axios';
+import { onMounted, reactive } from 'vue';
 
+const product = reactive([]);
+
+const getProduct = () => {
+  axios
+    .get(
+      `${import.meta.env.VITE_APP_URL}api/${
+        import.meta.env.VITE_APP_PATH
+      }/products/all`,
+    )
+    .then((res) => {
+      product.values = res.data;
+      console.log(res);
+      console.log(product.values);
+    });
+};
+
+onMounted(() => {
+  getProduct(product.value);
+});
 const seasonItem = reactive([
   {
     season: true,
@@ -128,6 +149,60 @@ const seasonItem = reactive([
       <div class="row mt-48 g-24">
         <div
           class="col-12 col-sm-6 col-lg-3"
+          v-for="(item, idx) in product.values.products"
+          :key="idx"
+        >
+          <div class="card border-0 rounded-4 season-item-card rounded-top-16 h-100">
+            <div class="card-top w-100 p-16 position-relative">
+              <img
+                :src="item.imagesUrl[0]"
+                class="cart-card-img mx-auto d-block"
+                alt="商品圖片"
+              />
+              <div
+                class="position-absolute h-25 top-0 end-0 d-flex flex-column"
+              >
+                <span class="badge bg-mainorg card-Badges" v-if="item.season">
+                  季節限定
+                </span>
+                <span
+                  class="badge bg-success card-Badges"
+                  v-else-if="item.hotItem"
+                >
+                  精選熱銷
+                </span>
+              </div>
+            </div>
+
+            <div class="card-body mt-8 px-22 py-0 text-mainred">
+              <h5 class="mb-0 fs-20 lh-base fw-bold">{{ item.category }}</h5>
+              <p class="fs-16 lh-base mb-8 fw-bold">{{ item.title }}</p>
+              <p class="fs-20 lh-base mb-8 fw-bold text-end">
+                NT${{ item.price }}/ <span class="fs-14">{{ item.unit }}</span>
+              </p>
+            </div>
+            <div class="card-footer border-0 p-0 rounded-bottom-16">
+              <button
+                type="button"
+                class="
+                  w-100
+                  border-0
+                  py-16
+                  fs-16
+                  lh-base
+                  rounded-bottom-16
+                  fw-bold
+                  goshop-btn
+                  stretched-link
+                " :disabled="!item.is_enabled"
+              >
+                立即購買
+              </button>
+            </div>
+          </div>
+        </div>
+        <div
+          class="col-12 col-sm-6 col-lg-3"
           v-for="(item, idx) in seasonItem"
           :key="idx"
         >
@@ -208,41 +283,50 @@ const seasonItem = reactive([
       </ul>
     </nav>
   </section>
+  <LayoutFooter />
 </template>
 <style lang="scss" scoped>
 .bread-mt {
   margin-top: 82px;
+
   @include lg {
     margin-top: 88px;
   }
 }
+
 .nav-link {
   color: #460303;
 }
+
 .nav-link-active {
   background-color: #460303;
   color: #fde47f;
   font-weight: bold;
 }
+
 .cart-card-img {
   width: 100%;
   height: 200px;
   object-fit: cover;
   object-position: center center;
 }
+
 .season-item-card {
   box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1);
 }
+
 .goshop-btn {
   background-color: #460303;
   color: #fde47f;
   transition: 0.2s;
+
   &:hover {
     background-color: #fde47f;
     color: #460303;
     transition: 0.2s;
   }
 }
+
 .card-Badges {
   top: 0;
   right: 0;
@@ -251,6 +335,7 @@ const seasonItem = reactive([
   padding-right: 16px;
   padding-left: 16px;
 }
+
 .nav-border {
   border-color: #460303;
   border-top: 1px solid;
