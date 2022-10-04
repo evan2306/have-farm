@@ -1,5 +1,4 @@
 <script setup>
-import LayoutFooter from '@/components/LayoutFooter.vue';
 import axios from 'axios';
 import { onMounted, reactive } from 'vue';
 import { useRoute } from 'vue-router';
@@ -16,9 +15,10 @@ const getProduct = () => {
       }/product/${pathId}`,
     )
     .then((res) => {
-      console.log(route.params.id);
-      console.log(res.data);
+      // console.log(route.params.id);
+      // console.log(res.data);
       product.values = res.data.product;
+      console.log('product.values', product.values);
     });
 };
 

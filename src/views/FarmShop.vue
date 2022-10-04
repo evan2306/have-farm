@@ -1,9 +1,9 @@
 <script setup>
 import LayoutFooter from '@/components/LayoutFooter.vue';
 import axios from 'axios';
-import { onMounted, reactive } from 'vue';
+import { onMounted, reactive, ref } from 'vue';
 
-const product = reactive([]);
+const product = ref([]);
 
 const getProduct = () => {
   axios
@@ -13,9 +13,7 @@ const getProduct = () => {
       }/products/all`,
     )
     .then((res) => {
-      product.values = res.data;
-      console.log(res);
-      console.log(product.values);
+      product.value = res.data;
     });
 };
 
@@ -149,7 +147,7 @@ const seasonItem = reactive([
       <div class="row mt-48 g-24">
         <div
           class="col-12 col-sm-6 col-lg-3"
-          v-for="(item, idx) in product.values.products"
+          v-for="(item, idx) in product.value"
           :key="idx"
         >
           <div

@@ -1,3 +1,88 @@
-<script setup></script>
-<template><h1></h1></template>
+<script setup>
+import axios from 'axios';
+import { reactive, watch } from 'vue';
+
+const user = reactive({
+  username: '',
+  password: '',
+});
+
+const login = () => {
+  axios
+    .post(`${import.meta.env.VITE_APP_URL}admin/signin`, user)
+    .then((res) => {
+      console.log(res.data);
+    })
+    .catch((err) => {});
+};
+</script>
+<template>
+  <div class="w-100 login-bg">
+    <div class="container-lg h-100">
+      <div
+        class="
+          login-box
+          row
+          w-100
+          h-100
+          justify-content-center
+          align-items-center
+        "
+      >
+        <div
+          class="
+            col-5
+            bg-white
+            pt-5
+            d-flex
+            justify-content-center
+            flex-wrap
+            rounded-12
+          "
+        >
+          <h1 class="mb-24">後台登入</h1>
+          <div class="mb-3 w-75">
+            <label for="exampleFormControlInput1" class="form-label"
+              >帳號</label
+            >
+            <input
+              type="email "
+              class="form-control"
+              id="adminLoginAccount"
+              placeholder="name@example.com"
+              v-model="user.username"
+            />
+          </div>
+          <div class="mb-5 w-75">
+            <label for="adminLoginPassword" class="form-label">密碼</label>
+            <input
+              type="email"
+              class="form-control"
+              id="adminLoginPassword"
+              v-model="user.password"
+            />
+          </div>
+          <button
+            type="button"
+            class="btn btn-mainred text-white fw-bold px-5 mb-32"
+            @click="login"
+          >
+            登入
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
 <style lang='scss' scoped>
+.login-bg {
+  height: 100vh;
+  background-image: url('../assets/images/about-footer-bg.png');
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  max-width: 100%;
+  background-color: rgba(0, 0, 0, 0.733);
+  background-blend-mode: multiply;
+}
+</style>
