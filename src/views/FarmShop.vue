@@ -152,7 +152,16 @@ const seasonItem = reactive([
           v-for="(item, idx) in product.values.products"
           :key="idx"
         >
-          <div class="card border-0 rounded-4 season-item-card rounded-top-16 h-100">
+          <div
+            class="
+              card
+              border-0
+              rounded-4
+              season-item-card
+              rounded-top-16
+              h-100
+            "
+          >
             <div class="card-top w-100 p-16 position-relative">
               <img
                 :src="item.imagesUrl[0]"
@@ -182,7 +191,8 @@ const seasonItem = reactive([
               </p>
             </div>
             <div class="card-footer border-0 p-0 rounded-bottom-16">
-              <button
+              <router-link
+                :to="`/farmshop/${item.id}`"
                 type="button"
                 class="
                   w-100
@@ -194,10 +204,11 @@ const seasonItem = reactive([
                   fw-bold
                   goshop-btn
                   stretched-link
-                " :disabled="!item.is_enabled"
+                "
+                :disabled="!item.is_enabled"
               >
                 立即購買
-              </button>
+              </router-link>
             </div>
           </div>
         </div>
@@ -319,6 +330,8 @@ const seasonItem = reactive([
   background-color: #460303;
   color: #fde47f;
   transition: 0.2s;
+  text-align: center;
+  text-decoration: none;
 
   &:hover {
     background-color: #fde47f;
