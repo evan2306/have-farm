@@ -1,5 +1,5 @@
 <script setup>
-console.log('環境變數=>', import.meta.env);
+// console.log('環境變數=>', import.meta.env);
 </script>
 
 <template>

@@ -12,6 +12,7 @@ const router = createRouter({
           path: '',
           name: '首頁',
           component: () => import('../views/HomeView.vue'),
+
         },
         {
           path: 'about',
@@ -54,7 +55,8 @@ const router = createRouter({
       component: () => import('../views/DashboardView.vue'),
       children: [
         {
-          path: 'adminproduct',
+          path: '',
+          name: '商品編輯',
           component: () => import('../views/AdminProductEdit.vue'),
         },
       ],

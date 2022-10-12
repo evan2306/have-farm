@@ -3,10 +3,14 @@ module.exports = {
   extends: [
     'plugin:vue/vue3-essential',
     'airbnb-base',
-    'airbnb-base',
   ],
   parserOptions: {
     ecmaVersion: 'latest',
+  },
+  rules: {
+    'no-console': 'off',
+    'import/prefer-default-export': 'off',
+    'no-useless-escape': 'off',
   },
   settings: {
     'import/resolver': {

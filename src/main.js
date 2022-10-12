@@ -4,7 +4,7 @@ import { createPinia } from 'pinia';
 import axios from 'axios';
 import App from './App.vue';
 import router from './router';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import './assets/libs/bootstrap/bootstrap.min.css';
 import 'bootstrap';
 import '@/assets/style/all.scss';
 
@@ -12,5 +12,4 @@ const app = createApp(App);
 
 app.use(createPinia());
 app.use(router);
-// app.use(axios);
 app.mount('#app');

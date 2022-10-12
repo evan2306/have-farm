@@ -1,20 +1,42 @@
 <script setup>
 import axios from 'axios';
-import { reactive, watch } from 'vue';
+import { onMounted, reactive } from 'vue';
+import { useRouter } from 'vue-router';
 
+const router = useRouter();
 const user = reactive({
   username: '',
   password: '',
 });
+const checkLogin = () => {
+  const token = document.cookie.replace(
+    // eslint-disable-next-line no-useless-escape
+    /(?:(?:^|.*;\s*)havefarmToken\s*\=\s*([^;]*).*$)|^.*$/,
+    '$1',
+  );
+  axios.defaults.headers.common.Authorization = token;
+  axios.post(`${import.meta.env.VITE_APP_URL}api/user/check`).then(() => {
+    alert('已成功驗證，進行跳轉');
+    router.push({ path: '/admin' });
+  });
+};
 
 const login = () => {
   axios
     .post(`${import.meta.env.VITE_APP_URL}admin/signin`, user)
     .then((res) => {
-      console.log(res.data);
+      const { token, expired } = res.data;
+      document.cookie = `havefarmToken=${token}; expires=${new Date(expired)};`;
+      checkLogin();
     })
-    .catch((err) => {});
+    .catch((err) => {
+      console.dir(err);
+    });
 };
+
+onMounted(() => {
+  checkLogin();
+});
 </script>
 <template>
   <div class="w-100 login-bg">
