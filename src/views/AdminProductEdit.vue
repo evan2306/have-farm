@@ -1,66 +1,35 @@
 <script setup>
-import { onMounted, ref } from 'vue';
-import axios from 'axios';
+import { onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
+// 跨域資料
 import { useModalStore } from '@/stores/modal';
-
+import { useDataStore } from '../stores/saveData';
+// 元件
+import { useCheckLogin } from '../composables/useCheckLogin';
 import ProductModal from '../components/ComponentProductModal.vue';
-// 貯存api資料
-const productList = ref([]);
+import { usePushProduct } from '../composables/usePushProduct';
 
-// get api
-const getProduct = () => {
-  axios
-    .get(
-      `${import.meta.env.VITE_APP_URL}api/${
-        import.meta.env.VITE_APP_PATH
-      }/admin/products/all`,
-    )
-    .then((res) => {
-      productList.value = Object.values(res.data.products);
-    });
+// 取得商品資料
+const dataStore = useDataStore();
+const { productData } = storeToRefs(dataStore);
+const { getProduct } = usePushProduct();
+
+// 檢查進入時是否有token
+const { checkLogin } = useCheckLogin();
+const checkLoginInProduct = async () => {
+  await checkLogin();
+  await getProduct();
 };
 
-// checklogin token
-const checkLogin = () => {
-  const token = document.cookie.replace(
-    /(?:(?:^|.*;\s*)havefarmToken\s*\=\s*([^;]*).*$)|^.*$/,
-    '$1',
-  );
-  axios.defaults.headers.common.Authorization = token;
-  axios
-    .post(`${import.meta.env.VITE_APP_URL}api/user/check`)
-    .then(() => {
-      getProduct();
-    })
-    .catch(() => {
-      // router.push({ path: '/adminlogin' });
-    });
-};
-
-// pinia modal物件
+// pinia product modal物件
 const store = useModalStore();
 // eslint-disable-next-line no-unused-vars
 const { addProduct, closeModal, creatProductModal } = store;
 const { isProductModal } = storeToRefs(store);
 
-// 定義modal物件
-
-// let productModal = null;
-// const isProductModal = ref(null);
-// const addProduct = () => {
-//   productModal.show();
-// };
-// const closeModal = () => {
-//   productModal.hide();
-// };
-
 onMounted(() => {
-  checkLogin();
+  checkLoginInProduct();
   creatProductModal();
-  // productModal = new Modal(isProductModal.value.isModal, {
-  //   backdrop: 'static',
-  // });
 });
 </script>
 <template>
@@ -68,7 +37,11 @@ onMounted(() => {
   <div class="container-lg">
     <div class="row justify-content-end mb-3">
       <div class="col-2">
-        <button type="button" class="btn btn-primary w-100" @click="addProduct">
+        <button
+          type="button"
+          class="btn btn-primary w-100"
+          @click="addProduct('isNew')"
+        >
           新增產品
         </button>
       </div>
@@ -86,7 +59,7 @@ onMounted(() => {
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(item, idx) in productList" :key="item.id" class="">
+        <tr v-for="(item, idx) in productData" :key="item.id" class="">
           <th scope="row" class="">
             {{ idx + 1 }}
           </th>
@@ -109,7 +82,13 @@ onMounted(() => {
                 gap-1
               "
             >
-              <button type="button" class="btn btn-primary">編輯</button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                @click="addProduct('edit', item)"
+              >
+                編輯
+              </button>
               <button type="button" class="btn btn-outline-danger">刪除</button>
             </div>
           </td>

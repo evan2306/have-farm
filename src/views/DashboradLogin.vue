@@ -1,6 +1,7 @@
 <script setup>
 import axios from 'axios';
 import { onMounted, reactive } from 'vue';
+import { useCheckLogin } from '@/composables/useCheckLogin';
 import { useRouter } from 'vue-router';
 
 const router = useRouter();
@@ -8,31 +9,22 @@ const user = reactive({
   username: '',
   password: '',
 });
-const checkLogin = () => {
-  const token = document.cookie.replace(
-    // eslint-disable-next-line no-useless-escape
-    /(?:(?:^|.*;\s*)havefarmToken\s*\=\s*([^;]*).*$)|^.*$/,
-    '$1',
-  );
-  axios.defaults.headers.common.Authorization = token;
-  axios.post(`${import.meta.env.VITE_APP_URL}api/user/check`).then(() => {
-    alert('已成功驗證，進行跳轉');
-    router.push({ path: '/admin' });
-  });
-};
-
+// 登入功能
 const login = () => {
   axios
     .post(`${import.meta.env.VITE_APP_URL}admin/signin`, user)
     .then((res) => {
       const { token, expired } = res.data;
       document.cookie = `havefarmToken=${token}; expires=${new Date(expired)};`;
-      checkLogin();
+      router.push({ path: '/admin' });
+      console.log(res.data);
     })
     .catch((err) => {
-      console.dir(err);
+      console.dir(err.response);
     });
 };
+// token驗證
+const { checkLogin } = useCheckLogin();
 
 onMounted(() => {
   checkLogin();

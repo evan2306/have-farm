@@ -1,28 +1,55 @@
 <script setup>
-import { ref } from 'vue';
-import { useProductApiStore } from '@/stores/pushProductApi';
-import { storeToRefs } from 'pinia';
+import { ref, watch } from 'vue';
 import { useModalStore } from '@/stores/modal';
+import { storeToRefs } from 'pinia';
+import { usePushProduct } from '../composables/usePushProduct';
 // modal關閉
 const isModal = ref(null);
-// const props = defineProps({
-//   closeModal: {
-//     type: Function,
-//     default: () => {},
-//   },
-// });
 const modalStore = useModalStore();
-const { closeModal } = modalStore;
+const { closeProductModal } = modalStore;
+const { newOrEdit, inComponentProduct } = storeToRefs(modalStore);
 
-// 新增產品資料
-const store = useProductApiStore();
-const { pushProduct } = store;
-const { tempProduct } = storeToRefs(store);
+const tempProduct = ref({
+  imagesUrl: [''],
+});
+
 defineExpose({ isModal });
 
+watch(inComponentProduct, () => {
+  console.log('change');
+  tempProduct.value = inComponentProduct.value;
+});
+
+watch(
+  tempProduct,
+  (newidx) => {
+    console.log(newidx);
+  },
+  { deep: true },
+);
+
+// 新增產品資料 compositon
+const {
+  pushProduct,
+  editProduct,
+  updataTempProduct,
+} = usePushProduct();
+
 const addProduct = () => {
-  pushProduct();
+  if (newOrEdit.value) {
+    pushProduct(tempProduct.value);
+  } else {
+    updataTempProduct.value = tempProduct.value;
+    editProduct(tempProduct.value);
+  }
 };
+
+const closeModal = () => {
+  newOrEdit.value = null;
+  tempProduct.value = { imagesUrl: [''] };
+  closeProductModal();
+};
+
 // 佔存編輯資料
 // const tempProduct = reactive({
 //   imagesUrl: [''],
@@ -73,7 +100,7 @@ const addProduct = () => {
                     type="text"
                     class="form-control"
                     placeholder="請輸入圖片連結"
-                    v-model="tempProduct.imgUrl"
+                    v-model.lazy="tempProduct.imgUrl"
                   />
                   <img class="img-fluid" :src="tempProduct.imgUrl" alt="" />
                 </div>
@@ -108,7 +135,7 @@ const addProduct = () => {
                         type="text"
                         class="form-control"
                         placeholder="請輸入圖片連結"
-                        v-model="tempProduct.imagesUrl[idx]"
+                        v-model.lazy="tempProduct.imagesUrl[idx]"
                       />
                       <img
                         class="img-fluid"
@@ -139,7 +166,7 @@ const addProduct = () => {
                   type="text"
                   class="form-control"
                   placeholder="請輸入標題"
-                  v-model="tempProduct.title"
+                  v-model.lazy="tempProduct.title"
                 />
               </div>
 
@@ -151,7 +178,7 @@ const addProduct = () => {
                     type="text"
                     class="form-control"
                     placeholder="請輸入分類"
-                    v-model="tempProduct.category"
+                    v-model.lazy="tempProduct.category"
                   />
                 </div>
                 <div class="mb-3 col-md-6">
@@ -161,7 +188,7 @@ const addProduct = () => {
                     type="text"
                     class="form-control"
                     placeholder="請輸入單位"
-                    v-model="tempProduct.unit"
+                    v-model.lazy="tempProduct.unit"
                   />
                 </div>
               </div>
@@ -175,7 +202,7 @@ const addProduct = () => {
                     min="0"
                     class="form-control"
                     placeholder="請輸入原價"
-                    v-model="tempProduct.origin_price"
+                    v-model.lazy.number="tempProduct.origin_price"
                   />
                 </div>
                 <div class="mb-3 col-md-6">
@@ -186,7 +213,7 @@ const addProduct = () => {
                     min="0"
                     class="form-control"
                     placeholder="請輸入售價"
-                    v-model="tempProduct.price"
+                    v-model.lazy.number="tempProduct.price"
                   />
                 </div>
                 <div class="mb-3 col-md-6">
@@ -196,7 +223,7 @@ const addProduct = () => {
                     type="text"
                     class="form-control"
                     placeholder="請輸入產地"
-                    v-model="tempProduct.aria"
+                    v-model.lazy="tempProduct.aria"
                   />
                 </div>
                 <div class="mb-3 col-md-6">
@@ -206,7 +233,7 @@ const addProduct = () => {
                     type="text"
                     class="form-control"
                     placeholder="請輸入牧場"
-                    v-model="tempProduct.farm"
+                    v-model.lazy="tempProduct.farm"
                   />
                 </div>
               </div>
@@ -219,7 +246,7 @@ const addProduct = () => {
                   type="text"
                   class="form-control"
                   placeholder="請輸入產品描述"
-                  v-model="tempProduct.description"
+                  v-model.lazy="tempProduct.description"
                 >
                 </textarea>
               </div>
@@ -230,7 +257,7 @@ const addProduct = () => {
                   type="text"
                   class="form-control"
                   placeholder="請輸入說明內容"
-                  v-model="tempProduct.content"
+                  v-model.lazy="tempProduct.content"
                 >
                 </textarea>
               </div>
@@ -240,7 +267,7 @@ const addProduct = () => {
                     id="is_enabled"
                     class="form-check-input"
                     type="checkbox"
-                    v-model="tempProduct.is_enabled"
+                    v-model.lazy.number="tempProduct.is_enabled"
                     :true-value="1"
                     :false-value="0"
                   />
@@ -493,7 +520,7 @@ const addProduct = () => {
     </div>
   </div> -->
 </template>
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .overflow-y {
   height: 70vh;
   overflow-y: scroll;

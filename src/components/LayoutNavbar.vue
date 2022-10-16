@@ -31,6 +31,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav ms-auto gap-24">
             <li class="nav-item">
+              <router-link
+                :to="{ name: '後台登入' }"
+                class="text-white text-center"
+                >後台登入</router-link
+              >
+            </li>
+            <li class="nav-item">
               <router-link to="about" class="nav-link navbtn text-center">
                 關於饗農</router-link
               >
@@ -50,6 +57,7 @@
                 >響農商城</router-link
               >
             </li>
+
             <li class="nav-item">
               <router-link
                 to="/farmcart"
