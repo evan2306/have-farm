@@ -24,6 +24,7 @@ export const useProductApiStore = defineStore('pushProductApi', () => {
       console.dir(error);
     }
   };
+
   return {
     pushProduct,
     tempProduct,

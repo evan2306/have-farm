@@ -7,6 +7,8 @@ import router from './router';
 import './assets/libs/bootstrap/bootstrap.min.css';
 import 'bootstrap';
 import '@/assets/style/all.scss';
+// eslint-disable-next-line import/order, no-unused-vars
+import Swal from 'sweetalert2';
 
 const app = createApp(App);
 

@@ -3,16 +3,16 @@ import { onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
 // 跨域資料
 import { useModalStore } from '@/stores/modal';
+
 import { useDataStore } from '../stores/saveData';
 // 元件
 import { useCheckLogin } from '../composables/useCheckLogin';
 import ProductModal from '../components/ComponentProductModal.vue';
 import { usePushProduct } from '../composables/usePushProduct';
-
 // 取得商品資料
 const dataStore = useDataStore();
 const { productData } = storeToRefs(dataStore);
-const { getProduct } = usePushProduct();
+const { getProduct, deleteAction } = usePushProduct();
 
 // 檢查進入時是否有token
 const { checkLogin } = useCheckLogin();
@@ -31,6 +31,7 @@ onMounted(() => {
   checkLoginInProduct();
   creatProductModal();
 });
+
 </script>
 <template>
   <ProductModal ref="isProductModal" />
@@ -89,7 +90,9 @@ onMounted(() => {
               >
                 編輯
               </button>
-              <button type="button" class="btn btn-outline-danger">刪除</button>
+              <button type="button"
+              class="btn btn-outline-danger"
+              @click="deleteAction(item)">刪除</button>
             </div>
           </td>
         </tr>

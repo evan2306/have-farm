@@ -30,17 +30,16 @@ watch(
 
 // 新增產品資料 compositon
 const {
-  pushProduct,
-  editProduct,
+  pushEditProduct,
   updataTempProduct,
 } = usePushProduct();
 
 const addProduct = () => {
   if (newOrEdit.value) {
-    pushProduct(tempProduct.value);
+    pushEditProduct(tempProduct.value, newOrEdit.value);
   } else {
     updataTempProduct.value = tempProduct.value;
-    editProduct(tempProduct.value);
+    pushEditProduct(tempProduct.value, newOrEdit.value);
   }
 };
 
@@ -50,23 +49,6 @@ const closeModal = () => {
   closeProductModal();
 };
 
-// 佔存編輯資料
-// const tempProduct = reactive({
-//   imagesUrl: [''],
-// });
-// const addProduct = () => {
-//   const url = `${import.meta.env.VITE_APP_URL}api/${
-//     import.meta.env.VITE_APP_PATH
-//   }/admin/product`;
-//   axios
-//     .post(url, { data: tempProduct })
-//     .then((res) => {
-//       console.log(res.data);
-//     })
-//     .catch((err) => {
-//       console.dir(err);
-//     });
-// };
 </script>
 <template>
   <div
