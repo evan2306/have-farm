@@ -9,6 +9,8 @@ import { useDataStore } from '../stores/saveData';
 import { useCheckLogin } from '../composables/useCheckLogin';
 import ProductModal from '../components/ComponentProductModal.vue';
 import { usePushProduct } from '../composables/usePushProduct';
+import ProductPagination from '../components/productPagination.vue';
+
 // 取得商品資料
 const dataStore = useDataStore();
 const { productData } = storeToRefs(dataStore);
@@ -16,16 +18,16 @@ const { getProduct, deleteAction } = usePushProduct();
 
 // 檢查進入時是否有token
 const { checkLogin } = useCheckLogin();
-const checkLoginInProduct = async () => {
-  await checkLogin();
-  await getProduct();
-};
-
 // pinia product modal物件
 const store = useModalStore();
 // eslint-disable-next-line no-unused-vars
 const { addProduct, closeModal, creatProductModal } = store;
 const { isProductModal } = storeToRefs(store);
+
+const checkLoginInProduct = async () => {
+  await checkLogin();
+  getProduct();
+};
 
 onMounted(() => {
   checkLoginInProduct();
@@ -98,6 +100,7 @@ onMounted(() => {
         </tr>
       </tbody>
     </table>
+    <ProductPagination ></ProductPagination>
   </div>
 </template>
 
