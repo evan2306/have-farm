@@ -11,26 +11,26 @@ import ProductModal from '../components/ComponentProductModal.vue';
 import { usePushProduct } from '../composables/usePushProduct';
 import ProductPagination from '../components/productPagination.vue';
 
-// 取得商品資料
-const dataStore = useDataStore();
-const { productData } = storeToRefs(dataStore);
-const { getProduct, deleteAction } = usePushProduct();
-
-// 檢查進入時是否有token
-const { checkLogin } = useCheckLogin();
 // pinia product modal物件
 const store = useModalStore();
 // eslint-disable-next-line no-unused-vars
 const { addProduct, closeModal, creatProductModal } = store;
 const { isProductModal } = storeToRefs(store);
+// 檢查進入時是否有token
+const { checkLogin } = useCheckLogin();
+
+// 取得商品資料
+const dataStore = useDataStore();
+const { productData } = storeToRefs(dataStore);
+const { getProduct, deleteAction, pagination } = usePushProduct();
 
 const checkLoginInProduct = async () => {
   await checkLogin();
-  getProduct();
+  await getProduct();
 };
+checkLoginInProduct();
 
 onMounted(() => {
-  checkLoginInProduct();
   creatProductModal();
 });
 
@@ -100,14 +100,14 @@ onMounted(() => {
         </tr>
       </tbody>
     </table>
-    <ProductPagination ></ProductPagination>
+    <ProductPagination :pages="pagination"></ProductPagination>
   </div>
 </template>
 
 <style lang="scss" scoped>
-* {
-  outline: 1px solid;
-}
+// * {
+//   outline: 1px solid;
+// }
 .itemimg {
   max-width: 50px;
   height: 50px;

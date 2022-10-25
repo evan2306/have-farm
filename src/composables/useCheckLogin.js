@@ -10,7 +10,6 @@ export function useCheckLogin() {
       /(?:(?:^|.*;\s*)havefarmToken\s*\=\s*([^;]*).*$)|^.*$/,
       '$1',
     );
-
     axios.defaults.headers.common.Authorization = token;
     axios.post(`${import.meta.env.VITE_APP_URL}api/user/check`)
       .then(() => {
