@@ -33,7 +33,6 @@ checkLoginInProduct();
 onMounted(() => {
   creatProductModal();
 });
-
 </script>
 <template>
   <ProductModal ref="isProductModal" />
@@ -100,7 +99,7 @@ onMounted(() => {
         </tr>
       </tbody>
     </table>
-    <ProductPagination :pages="pagination"></ProductPagination>
+    <ProductPagination :pages="pagination" @get-product="getProduct"></ProductPagination>
   </div>
 </template>
 
