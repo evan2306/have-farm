@@ -22,21 +22,29 @@ const { checkLogin } = useCheckLogin();
 // 取得商品資料
 const dataStore = useDataStore();
 const { productData } = storeToRefs(dataStore);
-const { getProduct, deleteAction, pagination } = usePushProduct();
+const {
+  getProduct, deleteAction, pagination, pushEditProduct,
+} = usePushProduct();
 
 const checkLoginInProduct = async () => {
   await checkLogin();
   await getProduct();
 };
+
+const test = (item, item1) => {
+  pushEditProduct(item, item1);
+};
+
 checkLoginInProduct();
 
 onMounted(() => {
   creatProductModal();
 });
+
 </script>
 <template>
-  <ProductModal ref="isProductModal" />
-  <div class="container-lg">
+  <ProductModal ref="isProductModal" @test-item="test"/>
+  <div class="container-xxl">
     <div class="row justify-content-end mb-3">
       <div class="col-2">
         <button
@@ -48,7 +56,7 @@ onMounted(() => {
         </button>
       </div>
     </div>
-    <table class="table text-center align-middle">
+    <table class="table text-center align-middle w-100">
       <thead>
         <tr>
           <th scope="col" width="5%"></th>
@@ -65,7 +73,7 @@ onMounted(() => {
           <th scope="row" class="">
             {{ idx + 1 }}
           </th>
-          <td><img :src="item.imagesUrl[0]" alt="" class="itemimg" /></td>
+          <td><img :src="item.imgUrl" alt="" class="itemimg" /> </td>
           <td class="">
             <span class="table-word-overflow text-start fw-bold">{{
               item.title
@@ -108,8 +116,9 @@ onMounted(() => {
 //   outline: 1px solid;
 // }
 .itemimg {
-  max-width: 50px;
+  max-width: 100px;
   height: 50px;
+  object-fit: contain;
 }
 .table-word-overflow {
   overflow: hidden;

@@ -13,95 +13,14 @@ const getProduct = () => {
       }/products/all`,
     )
     .then((res) => {
-      product.value = res.data;
+      product.value = res.data.products;
+      console.log(product.value);
     });
 };
 
 onMounted(() => {
-  getProduct(product.value);
+  getProduct();
 });
-const seasonItem = reactive([
-  {
-    season: true,
-    hotItem: false,
-    title: '屏東高級玉荷包',
-    farm: '荔貴妃',
-    price: 285,
-    unit: '每台斤',
-    imgUrl:
-      'https://github.com/piskesocute/have-farm/blob/main/src/assets/images/lichi.png?raw=true',
-  },
-  {
-    season: true,
-    hotItem: false,
-    title: '宜蘭特選三星蔥',
-    farm: '蔥動',
-    price: 99,
-    unit: '200g',
-    imgUrl:
-      'https://github.com/piskesocute/have-farm/blob/main/src/assets/images/green%20onion.jpg?raw=true',
-  },
-  {
-    season: true,
-    hotItem: false,
-    title: '台農22號蜜香',
-    farm: '與鳳有約',
-    price: 150,
-    unit: '顆',
-    imgUrl:
-      'https://github.com/piskesocute/have-farm/blob/main/src/assets/images/pineapple.jpg?raw=true',
-  },
-  {
-    season: true,
-    hotItem: false,
-    title: '極品綠竹筍',
-    farm: '心田山',
-    price: 120,
-    unit: '每台斤',
-    imgUrl:
-      'https://github.com/piskesocute/have-farm/blob/main/src/assets/images/bamboo%20shoots.png?raw=true',
-  },
-  {
-    season: false,
-    hotItem: true,
-    title: 'HTST 高溫殺菌鮮乳',
-    farm: '彗星牧場',
-    price: 120,
-    unit: '1850ml',
-    imgUrl:
-      'https://github.com/piskesocute/have-farm/blob/main/src/assets/images/milk.png?raw=true',
-  },
-  {
-    season: false,
-    hotItem: true,
-    title: '台東22年二期稻新米',
-    farm: '樂下土',
-    price: 200,
-    unit: '2KG',
-    imgUrl:
-      'https://github.com/piskesocute/have-farm/blob/main/src/assets/images/rice.png?raw=true',
-  },
-  {
-    season: false,
-    hotItem: false,
-    title: '伊比利豬德式香腸',
-    farm: '廚畜',
-    price: 150,
-    unit: '4條',
-    imgUrl:
-      'https://github.com/piskesocute/have-farm/blob/main/src/assets/images/hotdog.png?raw=true',
-  },
-  {
-    season: false,
-    hotItem: false,
-    title: '黑豬肉香腸',
-    farm: '廚畜',
-    price: 200,
-    unit: '6條',
-    imgUrl:
-      'https://github.com/piskesocute/have-farm/blob/main/src/assets/images/sausage.png?raw=true',
-  },
-]);
 </script>
 <template>
   <div class="bread-mt container-lg pt-16">
@@ -147,7 +66,7 @@ const seasonItem = reactive([
       <div class="row mt-48 g-24">
         <div
           class="col-12 col-sm-6 col-lg-3"
-          v-for="(item, idx) in product.value"
+          v-for="(item, idx) in product"
           :key="idx"
         >
           <div
@@ -162,7 +81,7 @@ const seasonItem = reactive([
           >
             <div class="card-top w-100 p-16 position-relative">
               <img
-                :src="item.imagesUrl[0]"
+                :src="item.imgUrl"
                 class="cart-card-img mx-auto d-block"
                 alt="商品圖片"
               />
@@ -182,8 +101,8 @@ const seasonItem = reactive([
             </div>
 
             <div class="card-body mt-8 px-22 py-0 text-mainred">
-              <h5 class="mb-0 fs-20 lh-base fw-bold">{{ item.category }}</h5>
-              <p class="fs-16 lh-base mb-8 fw-bold">{{ item.title }}</p>
+              <h5 class="mb-0 fs-20 lh-base fw-bold item-title">{{ item.title }}</h5>
+              <p class="fs-16 lh-base mb-8 fw-bold">{{ item.farm }}</p>
               <p class="fs-20 lh-base mb-8 fw-bold text-end">
                 NT${{ item.price }}/ <span class="fs-14">{{ item.unit }}</span>
               </p>
@@ -207,60 +126,6 @@ const seasonItem = reactive([
               >
                 立即購買
               </router-link>
-            </div>
-          </div>
-        </div>
-        <div
-          class="col-12 col-sm-6 col-lg-3"
-          v-for="(item, idx) in seasonItem"
-          :key="idx"
-        >
-          <div class="card border-0 rounded-4 season-item-card rounded-top-16">
-            <div class="card-top w-100 p-16 position-relative">
-              <img
-                :src="item.imgUrl"
-                class="cart-card-img mx-auto d-block"
-                alt="商品圖片"
-              />
-              <div
-                class="position-absolute h-25 top-0 end-0 d-flex flex-column"
-              >
-                <span class="badge bg-mainorg card-Badges" v-if="item.season">
-                  季節限定
-                </span>
-                <span
-                  class="badge bg-success card-Badges"
-                  v-else-if="item.hotItem"
-                >
-                  精選熱銷
-                </span>
-              </div>
-            </div>
-
-            <div class="card-body mt-8 px-22 py-0 text-mainred">
-              <h5 class="mb-0 fs-20 lh-base fw-bold">{{ item.farm }}</h5>
-              <p class="fs-16 lh-base mb-8 fw-bold">{{ item.title }}</p>
-              <p class="fs-20 lh-base mb-8 fw-bold text-end">
-                NT${{ item.price }}/ <span class="fs-14">{{ item.unit }}</span>
-              </p>
-            </div>
-            <div class="card-footer border-0 p-0 rounded-bottom-16">
-              <button
-                type="button"
-                class="
-                  w-100
-                  border-0
-                  py-16
-                  fs-16
-                  lh-base
-                  rounded-bottom-16
-                  fw-bold
-                  goshop-btn
-                  stretched-link
-                "
-              >
-                立即購買
-              </button>
             </div>
           </div>
         </div>
@@ -295,6 +160,13 @@ const seasonItem = reactive([
   <LayoutFooter />
 </template>
 <style lang="scss" scoped>
+.item-title{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+}
 .bread-mt {
   margin-top: 82px;
 

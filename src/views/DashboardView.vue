@@ -59,7 +59,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <router-link :to="{ name: '商品編輯' }">測試</router-link>
+            <router-link class="text-white text-center" :to="{ name: '商品編輯' }">產品編輯</router-link>
           </li>
         </ul>
       </div>
