@@ -1,7 +1,7 @@
 <script setup>
 import LayoutFooter from '@/components/LayoutFooter.vue';
 import axios from 'axios';
-import { onMounted, reactive, ref } from 'vue';
+import { onMounted, ref } from 'vue';
 
 const product = ref([]);
 
