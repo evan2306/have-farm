@@ -301,7 +301,7 @@ const closeModal = () => {
                       type="radio"
                       name="special"
                       id="hotItem"
-                      value="1"
+                      value='1'
                       v-model.number="tempProduct.is_special"
                     />
                     <label class="form-check-label" for="hotItem">

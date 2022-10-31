@@ -88,12 +88,12 @@ onMounted(() => {
               <div
                 class="position-absolute h-25 top-0 end-0 d-flex flex-column"
               >
-                <span class="badge bg-mainorg card-Badges" v-if="item.season">
+                <span class="badge bg-mainorg card-Badges" v-if="item.is_special==2">
                   季節限定
                 </span>
                 <span
                   class="badge bg-success card-Badges"
-                  v-else-if="item.hotItem"
+                  v-if="item.is_special==1"
                 >
                   精選熱銷
                 </span>
