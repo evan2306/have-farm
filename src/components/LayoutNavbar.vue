@@ -1,6 +1,6 @@
 <script setup></script>
 <template>
-  <div class="containe-lg">
+  <div class="container-lg">
     <nav
       class="
         navbar navbar-expand-lg navbar-light
@@ -12,7 +12,7 @@
     >
       <div class="container-lg">
         <h1 class="mb-0">
-          <router-link class="logo" to="/">饗農</router-link>
+          <router-link class="logo" :to="{ name: '首頁' }">饗農</router-link>
         </h1>
         <button
           class="navbar-toggler navhamburgerbtn"
@@ -38,22 +38,22 @@
               >
             </li>
             <li class="nav-item">
-              <router-link to="about" class="nav-link navbtn text-center">
+              <router-link :to="{ name: '關於饗農' }" class="nav-link navbtn text-center">
                 關於饗農</router-link
               >
             </li>
             <li class="nav-item">
-              <router-link to="news" class="nav-link navbtn text-center">
+              <router-link :to="{ name: '最新消息' }" class="nav-link navbtn text-center">
                 最新消息</router-link
               >
             </li>
             <li class="nav-item">
-              <router-link to="farmmap" class="nav-link navbtn text-center"
+              <router-link :to="{ name: '饗農地圖' }" class="nav-link navbtn text-center"
                 >饗農地圖</router-link
               >
             </li>
             <li class="nav-item">
-              <router-link to="farmshop" class="nav-link navbtn text-center"
+              <router-link :to="{ name: '響農商城' }" class="nav-link navbtn text-center"
                 >響農商城</router-link
               >
             </li>
