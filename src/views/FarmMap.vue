@@ -5,7 +5,7 @@ import LayoutFooter from '@/components/LayoutFooter.vue';
   <div class="bread-mt container-lg pt-16">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item" aria-current="page">\饗農地圖</li>
+        <li class="breadcrumb-item" aria-current="page">首頁>饗農地圖</li>
       </ol>
     </nav>
   </div>

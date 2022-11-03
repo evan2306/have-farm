@@ -41,7 +41,7 @@ const newsData = reactive([
   <div class="bread-mt container-lg pt-16">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item" aria-current="page">\最新消息</li>
+        <li class="breadcrumb-item" aria-current="page">首頁>最新消息</li>
       </ol>
     </nav>
   </div>

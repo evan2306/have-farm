@@ -26,7 +26,7 @@ onMounted(() => {
   <div class="bread-mt container-lg pt-16">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item" aria-current="page">\饗農商城</li>
+        <li class="breadcrumb-item" aria-current="page">首頁>饗農商城</li>
       </ol>
     </nav>
   </div>
