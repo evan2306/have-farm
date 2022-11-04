@@ -1,15 +1,14 @@
 <script setup>
 import { onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
-// 跨域資料
+// pinia modal、productdata
 import { useModalStore } from '@/stores/modal';
-
-import { useDataStore } from '../stores/saveData';
+import { useDataStore } from '@/stores/saveData';
 // 元件
-import { useCheckLogin } from '../composables/useCheckLogin';
-import ProductModal from '../components/ComponentProductModal.vue';
-import { usePushProduct } from '../composables/usePushProduct';
-import ProductPagination from '../components/productPagination.vue';
+import { useCheckLogin } from '@/composables/useCheckLogin';
+import { usePushProduct } from '@/composables/usePushProduct';
+import ProductModal from '@/components/ComponentProductModal.vue';
+import ProductPagination from '@/components/productPagination.vue';
 
 // pinia product modal物件
 const store = useModalStore();
@@ -26,24 +25,26 @@ const {
   getProduct, deleteAction, pagination, pushEditProduct,
 } = usePushProduct();
 
+// 驗證登入
 const checkLoginInProduct = async () => {
   await checkLogin();
   await getProduct();
 };
-
-const test = (item, item1) => {
-  pushEditProduct(item, item1);
-};
-
 checkLoginInProduct();
 
+// 更新產品資料
+const updateProduct = (product, isNewOrEdit) => {
+  pushEditProduct(product, isNewOrEdit);
+};
+
+// 建立modal實體
 onMounted(() => {
   creatProductModal();
 });
 
 </script>
 <template>
-  <ProductModal ref="isProductModal" @test-item="test"/>
+  <ProductModal ref="isProductModal" @update-product="updateProduct"/>
   <div class="container-xxl">
     <div class="row justify-content-end mb-3">
       <div class="col-2">

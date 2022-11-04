@@ -35,7 +35,7 @@ watch(inComponentProduct, (inputItem) => {
 // 新增產品資料 emit
 const emit = defineEmits(['test-item']);
 const addProduct = () => {
-  emit('test-item', tempProduct.value, newOrEdit.value);
+  emit('update-product', tempProduct.value, newOrEdit.value);
 };
 
 const closeModal = () => {
