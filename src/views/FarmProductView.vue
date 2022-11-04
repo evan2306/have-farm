@@ -1,19 +1,36 @@
 <script setup>
-import axios from 'axios';
 import { ref } from 'vue';
-import { useRoute } from 'vue-router';
 import { Swiper, SwiperSlide } from 'swiper/vue';
-
-// Import Swiper styles
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 import { FreeMode, Navigation, Thumbs } from 'swiper';
 
-const route = useRoute();
+import { storeToRefs } from 'pinia';
+import { useClientProduct } from '../composables/useClientProduct';
+import { useDataStore } from '../stores/saveData';
 
-const pathId = route.params.id;
+const dataStore = useDataStore();
+const { productData } = storeToRefs(dataStore);
+const { getClientProduct } = useClientProduct();
+
+console.log(getClientProduct());
+// 輪播
+const modules = [Thumbs, FreeMode, Navigation];
+const thumbsSwiper = ref(null);
+const setThumbsSwiper = (swiper) => {
+  thumbsSwiper.value = swiper;
+};
+// 計算加入購物車的數量
+const productNum = ref(1);
+const addCartCount = (count) => {
+  const nowCount = productNum.value + count;
+  if (nowCount <= productData.value.num && nowCount > 0) {
+    productNum.value = nowCount;
+  }
+};
+
 const product = ref({
   imgUrl: '',
   imagesUrl: [''],
@@ -29,32 +46,6 @@ const product = ref({
   is_enabled: 1,
   is_special: 0,
 });
-
-const getProduct = () => {
-  axios
-    .get(
-      `${import.meta.env.VITE_APP_URL}api/${
-        import.meta.env.VITE_APP_PATH
-      }/product/${pathId}`,
-    )
-    .then((res) => {
-      console.log(route.params.id);
-      console.log(res.data);
-      product.value = res.data.product;
-      console.log('product.value', product.value);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
-getProduct();
-
-const modules = [Thumbs, FreeMode, Navigation];
-const thumbsSwiper = ref(null);
-
-const setThumbsSwiper = (swiper) => {
-  thumbsSwiper.value = swiper;
-};
 </script>
 
 <template>
@@ -85,17 +76,20 @@ const setThumbsSwiper = (swiper) => {
             <swiper-slide>
               <img
                 class="productImgShow"
-                :src="product.imgUrl"
-                :alt="`${product.title}主圖`"
+                :src="productData.imgUrl"
+                :alt="`${productData.title}主圖`"
               />
             </swiper-slide>
             <swiper-slide
-              v-for="(item, index) in product.imagesUrl"
+              v-for="(item, index) in productData.imagesUrl"
               :key="index + 23145"
+              v-show="item !== ''"
             >
-              <img class="productImgShow"
-              :src="item"
-              :alt="`${product.title}+${index}`"/>
+              <img
+                class="productImgShow"
+                :src="item"
+                :alt="`${productData.title}+${index}`"
+              />
             </swiper-slide>
           </swiper>
           <swiper
@@ -108,30 +102,28 @@ const setThumbsSwiper = (swiper) => {
             class="mySwiper"
           >
             <swiper-slide>
-              <img class="productImgBar" :src="product.imgUrl" />
+              <img class="productImgBar" :src="productData.imgUrl" />
             </swiper-slide>
+
             <swiper-slide
-              v-for="(item, index) in product.imagesUrl"
+              v-for="(item, index) in productData.imagesUrl"
               :key="index + 38290189"
+              v-show="item !== ''"
             >
               <img class="productImgBar" :src="item" />
             </swiper-slide>
-
           </swiper>
         </div>
       </div>
       <div class="col-md-7">
-        <h1></h1>
-        <div class="describe-box">
-          <p>
-            ★紫錐菊定期補充顯著提升保護力、調整體質<br />
-            ★【專利紫錐萃取＋耐熱益生菌＋維他命Ｃ】<br />
-            ★每包含「總咖啡酸衍生物3570μg」<br />
-            ★使用美國有機『EMUNEPOWER專利紫錐菊』萃取<br />
-            ★無添加人工香料、色素、防腐劑 ★無農藥、無西藥、無重金屬、無塑化劑<br />
-          </p>
-        </div>
-        <h3 class="price">$1000<span>/每公斤</span></h3>
+        <h2 class="p-2">{{ productData.title }}</h2>
+        <div
+          class="describe-box px-2 py-4"
+          v-html="productData.description"
+        ></div>
+        <h5 class="price p-2">
+          {{ productData.price }}元<span>/{{ productData.unit }}</span>
+        </h5>
         <div class="accordion" id="accordionPanelsStayOpenExample">
           <div class="accordion-item">
             <h2 class="accordion-header" id="panelsStayOpen-headingOne">
@@ -152,51 +144,48 @@ const setThumbsSwiper = (swiper) => {
               aria-labelledby="panelsStayOpen-headingOne"
             >
               <div class="accordion-body">
-                <strong>優惠折扣中</strong>
+                <strong>優惠折扣中{{ productData.on_sale }}</strong>
               </div>
             </div>
+          </div>
+        </div>
+        <div
+          class="row row-cols-2 justify-content-around align-items-center mt-4"
+        >
+          <div class="">
+            <div class="input-group">
+              <button
+                class="btn btn-outline-mainred border-2 border"
+                type="button"
+                id="button-addon1"
+                @click="addCartCount(-1)"
+              >
+                -
+              </button>
+              <input
+                type="number"
+                disabled
+                class="form-control text-center"
+                placeholder=""
+                aria-label="Example text with button addon"
+                aria-describedby="button-addon1"
+                v-model="productNum"
 
-            <div
-              class="
-                row row-cols-2
-                justify-content-around
-                align-items-center
-                mt-4
-              "
-            >
-              <div class="">
-                <div class="input-group">
-                  <button
-                    class="btn btn-outline-mainred"
-                    type="button"
-                    id="button-addon1"
-                  >
-                    -
-                  </button>
-                  <input
-                    type="number"
-                    disabled
-                    class="form-control text-center"
-                    placeholder=""
-                    aria-label="Example text with button addon"
-                    aria-describedby="button-addon1"
-                    value="1"
-                  />
-                  <button
-                    class="btn btn-outline-mainred"
-                    type="button"
-                    id="button-addon1"
-                  >
-                    +
-                  </button>
-                </div>
-              </div>
-              <div class="div text-center">
-                <button class="btn btn-mainred text-mainyellow w-100">
-                  加入購物車
-                </button>
-              </div>
+              />
+              <button
+                class="btn btn-outline-mainred border-2 border"
+                type="button"
+                id="button-addon1"
+                @click="addCartCount(+1)"
+              >
+                +
+              </button>
             </div>
+          </div>
+          <div class="div text-center">
+            <button class="btn btn-mainred text-mainyellow w-100">
+              加入購物車
+            </button>
           </div>
         </div>
         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -251,7 +240,7 @@ const setThumbsSwiper = (swiper) => {
             role="tabpanel"
             aria-labelledby="itemDescriptionTab"
           >
-            商品介紹
+          <p v-html="productData.description"></p>
           </div>
           <div
             class="tab-pane"
@@ -259,7 +248,7 @@ const setThumbsSwiper = (swiper) => {
             role="tabpanel"
             aria-labelledby="itemContentTab"
           >
-            產品內容
+            產品內容{{ productData.content }}
           </div>
           <div
             class="tab-pane"
@@ -276,7 +265,7 @@ const setThumbsSwiper = (swiper) => {
 </template>
 <style lang="scss" scoped>
 * {
-  outline: 1px solid #000;
+  // outline: 1px solid #000;
 }
 .bread-mt {
   margin-top: 82px;
