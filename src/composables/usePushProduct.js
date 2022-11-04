@@ -6,22 +6,6 @@ import { useModalStore } from '../stores/modal';
 import { useDataStore } from '../stores/saveData';
 
 export function usePushProduct() {
-  // 取得產品
-  // const dataStore = useDataStore();
-  // const { productData, pagination } = storeToRefs(dataStore);
-  // const getProduct = async (page = 1) => {
-  //   const getProductApi = `${import.meta.env.VITE_APP_URL}api/${
-  //     import.meta.env.VITE_APP_PATH
-  //   }/admin/products?page=${page}`;
-  //   try {
-  //     const res = await axios.get(getProductApi);
-  //     productData.value = Object.values(res.data.products);
-  //     pagination.value = res.data.pagination;
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   const dataStore = useDataStore();
   const pagination = ref({
     total_pages: 1,
@@ -31,6 +15,7 @@ export function usePushProduct() {
     category: '',
   });
   const { productData } = storeToRefs(dataStore);
+
   const getProduct = async (page = 1) => {
     const getProductApi = `${import.meta.env.VITE_APP_URL}api/${
       import.meta.env.VITE_APP_PATH
