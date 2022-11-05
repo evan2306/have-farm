@@ -16,6 +16,7 @@ export const useDataStore = defineStore('dataSave', () => {
     content: '',
     is_enabled: 1,
     is_special: 0,
+    qty: 0,
   }]);
 
   const pagination = ref({
