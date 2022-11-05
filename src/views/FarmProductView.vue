@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
 import 'swiper/css/free-mode';
@@ -13,9 +13,8 @@ import { useDataStore } from '../stores/saveData';
 
 const dataStore = useDataStore();
 const { productData } = storeToRefs(dataStore);
-const { getClientProduct } = useClientProduct();
+const { getClientProduct, addCart } = useClientProduct();
 
-console.log(getClientProduct());
 // 輪播
 const modules = [Thumbs, FreeMode, Navigation];
 const thumbsSwiper = ref(null);
@@ -23,14 +22,31 @@ const setThumbsSwiper = (swiper) => {
   thumbsSwiper.value = swiper;
 };
 // 計算加入購物車的數量
-const productNum = ref(1);
+const productQty = ref(1);
 const addCartCount = (count) => {
-  const nowCount = productNum.value + count;
-  if (nowCount <= productData.value.num && nowCount > 0) {
-    productNum.value = nowCount;
+  const nowCount = productQty.value + count;
+  if (nowCount <= productData.value.qty && nowCount > 0) {
+    productQty.value = nowCount;
   }
 };
 
+const addToCart = async (id, title) => {
+  try {
+    const res1 = await addCart(id, title, productQty.value);
+    const res2 = await getClientProduct();
+    console.log('最外層', {
+      接收api回傳結果: res1,
+      執行重新讀取api結果: res2,
+    });
+    productQty.value = 1;
+  } catch (error) {
+
+  }
+};
+
+onMounted(() => {
+  getClientProduct();
+});
 const product = ref({
   imgUrl: '',
   imagesUrl: [''],
@@ -45,6 +61,7 @@ const product = ref({
   content: '',
   is_enabled: 1,
   is_special: 0,
+  qty: 0,
 });
 </script>
 
@@ -150,7 +167,13 @@ const product = ref({
           </div>
         </div>
         <div
-          class="row row-cols-2 justify-content-around align-items-center mt-4"
+          class="
+            row row-cols-2
+            mb-16
+            justify-content-around
+            align-items-center
+            mt-4
+          "
         >
           <div class="">
             <div class="input-group">
@@ -159,9 +182,20 @@ const product = ref({
                 type="button"
                 id="button-addon1"
                 @click="addCartCount(-1)"
+                :disabled="!productData.qty>0"
               >
                 -
               </button>
+              <input
+                type="number"
+                readonly
+                class="form-control text-center"
+                placeholder=""
+                aria-label="Example text with button addon"
+                aria-describedby="button-addon1"
+                v-model="productQty"
+                v-if="productData.qty>0"
+              />
               <input
                 type="number"
                 disabled
@@ -169,26 +203,39 @@ const product = ref({
                 placeholder=""
                 aria-label="Example text with button addon"
                 aria-describedby="button-addon1"
-                v-model="productNum"
-
+                value="0"
+                v-else
               />
               <button
                 class="btn btn-outline-mainred border-2 border"
                 type="button"
                 id="button-addon1"
                 @click="addCartCount(+1)"
+                :disabled="!productData.qty>0"
               >
                 +
               </button>
             </div>
           </div>
           <div class="div text-center">
-            <button class="btn btn-mainred text-mainyellow w-100">
+            <button
+              class="btn btn-mainred cart-btn fw-bold fs-18 w-100"
+              @click="addToCart(productData.id,productData.title)"
+              v-if="productData.qty>0"
+            >
               加入購物車
+            </button>
+            <button
+              class="btn btn-mainred cart-btn fw-bold fs-18 w-100"
+              disabled
+              v-else
+            >
+              商品已售完
             </button>
           </div>
         </div>
-        <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <hr />
+        <ul class="nav nav-tabs mt-32" id="myTab" role="tablist">
           <li class="nav-item" role="presentation">
             <button
               class="nav-link active"
@@ -240,7 +287,7 @@ const product = ref({
             role="tabpanel"
             aria-labelledby="itemDescriptionTab"
           >
-          <p v-html="productData.description"></p>
+            <p v-html="productData.description"></p>
           </div>
           <div
             class="tab-pane"
@@ -269,6 +316,14 @@ const product = ref({
 }
 .bread-mt {
   margin-top: 82px;
+}
+.cart-btn {
+  color: #fff;
+  border-color: #fde47f;
+}
+.cart-btn:hover {
+  color: #fde47f;
+  background-color: #940707;
 }
 
 .productImgShow {
@@ -341,5 +396,6 @@ const product = ref({
   width: 100%;
   height: 75px;
   object-fit: cover;
+  cursor: pointer;
 }
 </style>
