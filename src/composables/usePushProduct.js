@@ -30,7 +30,7 @@ export function usePushProduct() {
   };
 
   // api回傳視窗
-  const actionAlert = (action, state, title = '產品', request = null) => {
+  const actionAlert = (action, state, title = '產品', request = '') => {
     if (state) {
       Swal.fire({
         title: `<strong>${action}成功</strong>`,
@@ -40,8 +40,12 @@ export function usePushProduct() {
         getProduct();
       });
     } else {
-      const errorText = request.join().replace(',', '、');
-      console.log(request, errorText);
+      let errorText;
+      if (Array.isArray(request)) {
+        errorText = request.join().replaceAll(',', '、');
+      } else {
+        errorText = request;
+      }
       Swal.fire({
         title: `<strong>${action}失敗</strong>`,
         icon: 'error',
@@ -139,5 +143,6 @@ export function usePushProduct() {
     getProduct,
     productData,
     deleteAction,
+    actionAlert,
   };
 }
