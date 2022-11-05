@@ -23,6 +23,7 @@ const tempProduct = ref({
   content: '',
   is_enabled: 0,
   is_special: 0,
+  qty: 0,
 });
 
 defineExpose({ isModal });
@@ -54,6 +55,7 @@ const closeModal = () => {
     content: '',
     is_enabled: 1,
     is_special: 0,
+    qty: 0,
   };
   closeProductModal();
 };
@@ -238,6 +240,19 @@ const closeModal = () => {
                     class="form-control"
                     placeholder="請輸入牧場"
                     v-model.lazy="tempProduct.farm"
+                  />
+                </div>
+              </div>
+              <div class="row">
+                <div class="mb-3 col-md-6">
+                  <label for="origin_price" class="form-label">庫存數量</label>
+                  <input
+                    id="origin_price"
+                    type="number"
+                    min="0"
+                    class="form-control"
+                    placeholder="請輸入庫存"
+                    v-model.lazy.number="tempProduct.qty"
                   />
                 </div>
               </div>
