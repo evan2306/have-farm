@@ -40,7 +40,7 @@ const addToCart = async (id, title) => {
     });
     productQty.value = 1;
   } catch (error) {
-
+    console.log(error);
   }
 };
 
@@ -182,7 +182,7 @@ const product = ref({
                 type="button"
                 id="button-addon1"
                 @click="addCartCount(-1)"
-                :disabled="!productData.qty>0"
+                :disabled="!productData.qty > 0"
               >
                 -
               </button>
@@ -194,7 +194,7 @@ const product = ref({
                 aria-label="Example text with button addon"
                 aria-describedby="button-addon1"
                 v-model="productQty"
-                v-if="productData.qty>0"
+                v-if="productData.qty > 0"
               />
               <input
                 type="number"
@@ -211,7 +211,7 @@ const product = ref({
                 type="button"
                 id="button-addon1"
                 @click="addCartCount(+1)"
-                :disabled="!productData.qty>0"
+                :disabled="!productData.qty > 0"
               >
                 +
               </button>
@@ -220,8 +220,8 @@ const product = ref({
           <div class="div text-center">
             <button
               class="btn btn-mainred cart-btn fw-bold fs-18 w-100"
-              @click="addToCart(productData.id,productData.title)"
-              v-if="productData.qty>0"
+              @click="addToCart(productData.id, productData.title)"
+              v-if="productData.qty > 0"
             >
               加入購物車
             </button>

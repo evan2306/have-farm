@@ -6,7 +6,7 @@ $utilities: map-merge(
       rfs: true,
       property: font-size,
       class: fs,
-      values: $font-sizes
+      values: $font-sizes,
     ),
     "width": (
       property: width,
@@ -33,9 +33,9 @@ $utilities: map-merge(
         65: 65%,
         75: 75%,
         85: 85%,
-        95: 95%,      
+        95: 95%,
         auto: auto,
-      )
+      ),
     ),
     "rounded": (
       property: border-radius,
@@ -50,30 +50,50 @@ $utilities: map-merge(
         5: var(--#{$prefix}border-radius-2xl),
         circle: 50%,
         pill: var(--#{$prefix}border-radius-pill),
-        8:8px,
-        12:12px,
-        16:16px,
-      )
+        8: 8px,
+        12: 12px,
+        16: 16px,
+      ),
     ),
     "rounded-top": (
       property: border-top-left-radius border-top-right-radius,
       class: rounded-top,
       values: (
         null: var(--#{$prefix}border-radius),
-        4:4px,
-        8:8px,
-        16:16px,
-        )
+        4: 4px,
+        8: 8px,
+        16: 16px,
+      ),
     ),
     "rounded-bottom": (
       property: border-bottom-right-radius border-bottom-left-radius,
       class: rounded-bottom,
       values: (
         null: var(--#{$prefix}border-radius),
-        4:4px,
-        8:8px,
-        16:16px,
-        )
+        4: 4px,
+        8: 8px,
+        16: 16px,
+      ),
+    ),
+    "rounded-start": (
+      property: border-bottom-left-radius border-top-left-radius,
+      class: rounded-start,
+      values: (
+        null: var(--#{$prefix}border-radius),
+        4: 4px,
+        8: 8px,
+        16: 16px,
+      ),
+    ),
+    "rounded-end": (
+      property: border-top-right-radius border-bottom-right-radius,
+      class: rounded-end,
+      values: (
+        null: var(--#{$prefix}border-radius),
+        4: 4px,
+        8: 8px,
+        16: 16px,
+      ),
     ),
   )
 );

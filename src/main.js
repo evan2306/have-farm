@@ -7,6 +7,7 @@ import router from './router';
 import './assets/libs/bootstrap/bootstrap.min.css';
 import 'bootstrap';
 import '@/assets/style/all.scss';
+import 'bootstrap-icons/font/bootstrap-icons.css';
 // eslint-disable-next-line import/order, no-unused-vars
 import Swal from 'sweetalert2';
 
