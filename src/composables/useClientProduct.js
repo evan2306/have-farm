@@ -41,7 +41,6 @@ export function useClientProduct() {
           icon: 'success',
           html: `<span class="text-danger">${title}</span>已成功${action}`,
         });
-        console.log('最內Alert，回傳res', res);
         return res;
       } catch (error) {
         console.log(error);
@@ -60,7 +59,6 @@ export function useClientProduct() {
         html: `<span class="text-danger">${title}</span>${action}失敗，請重新嘗試</br>`,
         footer: `<p class='text-danger'>${errorText}</p>`,
       });
-      console.log('最內Alert，回傳err res', res);
       return res;
     } catch (error) {
       console.log(error);
