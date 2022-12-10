@@ -1,5 +1,5 @@
 <script setup>
-import LayoutFooter from '@/components/LayoutFooter.vue';
+import BreadCrumb from '@/components/BreadCrumb.vue';
 import axios from 'axios';
 import { onMounted, ref } from 'vue';
 
@@ -14,7 +14,6 @@ const getProduct = () => {
     )
     .then((res) => {
       product.value = res.data.products;
-      console.log(product.value);
     });
 };
 
@@ -23,13 +22,7 @@ onMounted(() => {
 });
 </script>
 <template>
-  <div class="bread-mt container-lg pt-16">
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item" aria-current="page">首頁>饗農商城</li>
-      </ol>
-    </nav>
-  </div>
+  <BreadCrumb/>
   <main>
     <div class="container-lg">
       <ul class="nav nav-tabs d-flex justify-content-center text-center w-100">
@@ -157,7 +150,6 @@ onMounted(() => {
       </ul>
     </nav>
   </section>
-  <LayoutFooter />
 </template>
 <style lang="scss" scoped>
 .item-title{
@@ -166,13 +158,6 @@ onMounted(() => {
   display: -webkit-box;
   -webkit-line-clamp: 1;
   -webkit-box-orient: vertical;
-}
-.bread-mt {
-  margin-top: 82px;
-
-  @include lg {
-    margin-top: 88px;
-  }
 }
 
 .nav-link {

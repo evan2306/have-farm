@@ -1,6 +1,7 @@
 <script setup>
 import LayoutFooter from '@/components/LayoutFooter.vue';
 import { reactive } from 'vue';
+import BreadCrumb from '../components/BreadCrumb.vue';
 
 const newsData = reactive([
   {
@@ -38,6 +39,8 @@ const newsData = reactive([
 ]);
 </script>
 <template>
+
+  <BreadCrumb/>
   <div class="bread-mt container-lg pt-16">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
