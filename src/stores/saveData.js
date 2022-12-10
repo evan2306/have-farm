@@ -27,8 +27,10 @@ export const useDataStore = defineStore('dataSave', () => {
     category: '',
   });
 
+  const navbarCartItemQty = ref(0);
   return {
     productData,
     pagination,
+    navbarCartItemQty,
   };
 });

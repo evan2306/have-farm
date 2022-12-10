@@ -1,4 +1,12 @@
-<script setup></script>
+<script setup>
+import { } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useDataStore } from '../stores/saveData';
+
+const dataStore = useDataStore();
+const { navbarCartItemQty } = storeToRefs(dataStore);
+
+</script>
 <template>
   <div class="container-lg">
     <nav
@@ -38,26 +46,35 @@
               >
             </li>
             <li class="nav-item">
-              <router-link :to="{ name: '關於饗農' }" class="nav-link navbtn text-center">
+              <router-link
+                :to="{ name: '關於饗農' }"
+                class="nav-link navbtn text-center"
+              >
                 關於饗農</router-link
               >
             </li>
             <li class="nav-item">
-              <router-link :to="{ name: '最新消息' }" class="nav-link navbtn text-center">
+              <router-link
+                :to="{ name: '最新消息' }"
+                class="nav-link navbtn text-center"
+              >
                 最新消息</router-link
               >
             </li>
             <li class="nav-item">
-              <router-link :to="{ name: '饗農地圖' }" class="nav-link navbtn text-center"
+              <router-link
+                :to="{ name: '饗農地圖' }"
+                class="nav-link navbtn text-center"
                 >饗農地圖</router-link
               >
             </li>
             <li class="nav-item">
-              <router-link :to="{ name: '響農商城' }" class="nav-link navbtn text-center"
+              <router-link
+                :to="{ name: '響農商城' }"
+                class="nav-link navbtn text-center"
                 >響農商城</router-link
               >
             </li>
-
             <li class="nav-item">
               <router-link
                 to="/farmcart"
@@ -71,8 +88,26 @@
                   gap-2 gap-lg-0
                 "
               >
-                <i class="material-icons align-middle fs-5"> shopping_cart </i>
+                <span
+                  class="
+                    position-absolute
+                    top-0
+                    start-100
+                    translate-middle
+                    badge
+                    rounded-pill
+                    bg-danger
+                    d-none
+                    d-lg-block
+                  "
+                  v-if="navbarCartItemQty>0"
+                >
+                <span v-if="navbarCartItemQty<100">{{navbarCartItemQty}}</span>
+                <span v-if="navbarCartItemQty>100">99+</span>
 
+                  <span class="visually-hidden">unread messages</span>
+                </span>
+                <i class="material-icons align-middle fs-5"> shopping_cart </i>
                 <p class="d-block d-lg-none mb-0">購物車</p>
               </router-link>
             </li>
