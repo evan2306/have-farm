@@ -1,4 +1,6 @@
+<!-- 商品頁面 -->
 <script setup>
+
 import { onMounted, ref } from 'vue';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
@@ -8,8 +10,9 @@ import 'swiper/css/thumbs';
 import { FreeMode, Navigation, Thumbs } from 'swiper';
 
 import { storeToRefs } from 'pinia';
-import { useClientProduct } from '../composables/useClientProduct';
+import { useCartApi } from '../composables/useCartApi';
 import { useDataStore } from '../stores/saveData';
+import { useClientProduct } from '../composables/useClientProduct';
 
 const dataStore = useDataStore();
 const { productData } = storeToRefs(dataStore);
@@ -30,23 +33,21 @@ const addCartCount = (count) => {
   }
 };
 
+// 取的購物車數量
+const { getCartData } = useCartApi();
+
 const addToCart = async (id, title) => {
   try {
-    const res1 = await addCart(id, title, productQty.value);
-    const res2 = await getClientProduct();
-    console.log('最外層', {
-      接收api回傳結果: res1,
-      執行重新讀取api結果: res2,
-    });
+    await addCart(id, title, productQty.value);
+    await getClientProduct();
+    await getCartData();
     productQty.value = 1;
   } catch (error) {
     console.log(error);
   }
 };
 
-onMounted(() => {
-  getClientProduct();
-});
+// eslint-disable-next-line no-unused-vars
 const product = ref({
   imgUrl: '',
   imagesUrl: [''],
@@ -63,19 +64,14 @@ const product = ref({
   is_special: 0,
   qty: 0,
 });
+
+onMounted(async () => {
+  await getClientProduct();
+});
 </script>
 
 <template>
-  <div class="bread-mt container-lg pt-16 mt-80">
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item" aria-current="page">
-          首頁>饗農商城>產品頁
-        </li>
-      </ol>
-    </nav>
-  </div>
-  <div class="container-lg">
+  <div class="container-lg mt-48 mb-80">
     <div class="row">
       <div class="col-md-5">
         <div class="sticky-top">
@@ -311,12 +307,9 @@ const product = ref({
   </div>
 </template>
 <style lang="scss" scoped>
-* {
-  // outline: 1px solid #000;
-}
-.bread-mt {
-  margin-top: 82px;
-}
+// * {
+//   // outline: 1px solid #000;
+// }
 .cart-btn {
   color: #fff;
   border-color: #fde47f;
