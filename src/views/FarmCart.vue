@@ -1,60 +1,64 @@
 <script setup>
-import { onMounted, ref } from 'vue';
+import {
+  computed, onMounted, ref, watch,
+} from 'vue';
 import axios from 'axios';
+import BreadCrumb from '@/components/BreadCrumb.vue';
+import { useCartApi } from '../composables/useCartApi';
 
-const cartData = ref({
-  success: true,
-  data: {
-    carts: [
-      {
-        coupon: {
-          code: '',
-          due_date: 0,
-          id: '',
-          is_enabled: 0,
-          percent: 0,
-          title: '',
-        },
-        final_total: 0,
-        id: '',
-        product: {
-          category: '',
-          content: '',
-          description: '',
-          id: '',
-          imageUrl: '',
-          imagesUrl: [''],
-          is_enabled: 1,
-          num: 1,
-          origin_price: 0,
-          price: 0,
-          title: '',
-          unit: '',
-        },
-        product_id: '',
-        qty: 1,
-        total: 3600,
-      },
-    ],
-    total: 3600,
-    final_total: 3600,
-  },
-  messages: [],
-});
+const { cartData, getCartData } = useCartApi();
 
-const getCartData = async () => {
-  axios
-    .get(
-      `${import.meta.env.VITE_APP_URL}api/${
-        import.meta.env.VITE_APP_PATH
-      }/cart`,
-    )
-    .then((res) => {
-      console.log(res.data);
-      cartData.value = res.data.data;
-      console.log(cartData.value);
-    });
-};
+// const cartData = ref({
+//   success: true,
+//   data: {
+//     carts: [
+//       {
+//         coupon: {
+//           code: '',
+//           due_date: 0,
+//           id: '',
+//           is_enabled: 0,
+//           percent: 0,
+//           title: '',
+//         },
+//         final_total: 0,
+//         id: '',
+//         product: {
+//           category: '',
+//           content: '',
+//           description: '',
+//           id: '',
+//           imageUrl: '',
+//           imagesUrl: [''],
+//           is_enabled: 1,
+//           num: 1,
+//           origin_price: 0,
+//           price: 0,
+//           title: '',
+//           unit: '',
+//         },
+//         product_id: '',
+//         qty: 1,
+//         total: 3600,
+//       },
+//     ],
+//     total: 3600,
+//     final_total: 3600,
+//   },
+//   messages: [],
+// });
+
+// const getCartData = async () => {
+//   axios
+//     .get(
+//       `${import.meta.env.VITE_APP_URL}api/${
+//         import.meta.env.VITE_APP_PATH
+//       }/cart`,
+//     )
+//     .then((res) => {
+//       cartData.value = res.data.data;
+//     });
+// };
 
 const deleteCartData = async (id) => {
   try {
@@ -68,18 +72,25 @@ const deleteCartData = async (id) => {
     console.log(error);
   }
 };
-onMounted(() => {
-  getCartData();
+
+const isClean = ref(true);
+
+const test = watch(cartData, (nexIdx) => {
+  if (nexIdx.carts.length > 0) {
+    isClean.value = false;
+  } else {
+    isClean.value = true;
+  }
+  console.log(isClean.value);
+});
+
+onMounted(async () => {
+  await getCartData();
+  // cartIsClean();
 });
 </script>
 <template>
-  <div class="bread-mt container-lg pt-16">
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item" aria-current="page">首頁>饗農地圖</li>
-      </ol>
-    </nav>
-  </div>
+  <BreadCrumb />
 
   <div class="step-box d-flex justify-content-center align-items-center my-32">
     <div class="step active d-flex justify-content-center align-items-center">
@@ -96,10 +107,30 @@ onMounted(() => {
   </div>
 
   <div class="container-md mb-16">
-    <h2>購物車清單</h2>
-    <ul class="list-unstyled row justify-content-center align-items-center">
+    <hr />
+    <div
+      class="bg-maingray text-center py-48 mb-32 rounded rounded-16"
+      v-if="isClean"
+    >
+      <div class="d-flex justify-content-center align-items-center">
+        <img src="../assets/images/cart-clean.png" alt="" class="img-fluid" />
+      </div>
+      <h4 class="fw-bold mt-32">哎呀! 購物車是空的呢...</h4>
+      <p class="fw-bold mt-16">回到商城繼續選購吧!</p>
+
+      <router-link
+        :to="{ name: '響農商城' }"
+        class="btn fs-20 lh-sm fw-bold py-16 px-48 rounded-16 goshop-btn"
+        >回到響農商城</router-link
+      >
+    </div>
+
+    <ul
+      class="list-unstyled row justify-content-center align-items-center"
+      v-else
+    >
       <li
-        v-for="(item,index) in cartData.carts"
+        v-for="(item, index) in cartData.carts"
         :key="index + 13215"
         class="row justify-content-center align-items-center"
       >
@@ -113,15 +144,11 @@ onMounted(() => {
           </a>
         </div>
         <div class="col-4 col-md-2">
-          <img
-            :src="item.product.imgUrl"
-            class="cart-img my-16"
-            alt=""
-          />
+          <img :src="item.product.imgUrl" class="cart-img my-16" alt="" />
         </div>
         <div class="col-6 col-md-4">
           <p class="m-0 cart-item-title fs-20">
-            {{item.product.title }}
+            {{ item.product.title }}
           </p>
 
           <p class="m-0 text-secondary">
@@ -146,7 +173,6 @@ onMounted(() => {
               type="button"
               class="btn btn-outline-mainred border-0 rounded-0 rounded-start-4"
             >
-
               <i class="bi bi-dash-lg fs-20"></i>
             </button>
             <input
@@ -174,7 +200,13 @@ onMounted(() => {
         </div>
         <div class="col-4 col-md-2">
           <div class="w-100">
-            <div class="d-none d-md-flex justify-content-between align-items-center">
+            <div
+              class="
+                d-none d-md-flex
+                justify-content-between
+                align-items-center
+              "
+            >
               <p class="mb-1 fs-18">售價 $</p>
               <p class="mb-1 fs-18">{{ item.product.price }}</p>
             </div>
@@ -184,75 +216,45 @@ onMounted(() => {
             </div>
           </div>
         </div>
-
-        <hr class="" />
       </li>
     </ul>
-    <!-- <div class="row justify-content-center align-items-center">
-      <div class="col-2 col-md-1 d-flex justify-content-center">
-        <a
-          class="cart-delete-btn d-block text-center w-100"
-          href="#"
-          @click.prevent="1"
-        >
-          <i class="bi bi-x-square fs-18"></i>
-        </a>
-      </div>
-      <div class="col-4 col-md-2">
-        <img
-          :src="cartData.data.carts[0].product.imgUrl"
-          class="img-fluid"
-          alt=""
-        />
-      </div>
-      <div class="col-6 col-md-4">
-        <p class="">{{ cartData.data.carts[0].product.title }}</p>
-        商品內容
-      </div>
-      <div class="col-6 col-md-3">商品數量</div>
-      <div class="col-6 col-md-2">商品價格</div>
-    </div> -->
+    <hr>
   </div>
-  <!-- <div class="container-lg">
-    <table class="table align-middle">
-      <thead class="bg-mainred text-white text-center">
-        <tr>
-          <th scope="col" width="35%">商品</th>
-          <th scope="col" width="5%">數量</th>
-          <th scope="col" width="7%">單價</th>
-          <th scope="col" width="7%">小計</th>
-          <th scope="col" width="5%">操作</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="(item, index) in cartData.data.carts" :key="index + 3215">
-          <th scope="row">
-            <img :src="item.product.imgUrl" class="cart-img" alt="" />
-            {{ item.product.title }}
-          </th>
-          <td class="">
-            <div class="">
-              <select
-              class="form-select form-select-sm text-center"
-              aria-label="Default select example"
-              v-model="item.qty"
-              >
-                <option
-                v-for="index in item.qty+5"
-                :key="index+31252"
-                :value="index">{{index}}</option>
-              </select>
-            </div>
-          </td>
-          <td class="text-center">${{item.product.price}}</td>
-          <td class="text-center">${{item.total}}</td>
-          <td class="text-center">
-            <button type="button" class="btn btn-sm btn-outline-mainred">刪除</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div> -->
+  <div class="container-md mt-64 ">
+    <h5 class="mb-32">購物須知</h5>
+    <div class="bg-maingray p-16 rounded rounded-16 mb-32">
+      <ol class="mb-16">
+      <p>感謝您向 饗農購物商城訂購商品，為維護您的權益，請仔細閱讀下述說明：</p>
+      <li>
+        <p>
+          本購物須知是Yahoo奇摩服務條款的補充條款，當您使用饗農購物商城時，即表示您已閱讀、瞭解並同意接受本購物須知所訂之所有內容。本須知得隨時修訂並公告於饗農購物商城上，修訂後之內容自公告時起生效。
+        </p>
+      </li>
+      <li>
+        <p>
+          若您未滿二十歲，您應於您的家長（或監護人）閱讀、瞭解並同意本購物須知之所有內容及其後修改變更後，方得使用或繼續使用饗農購物商城。當您使用或繼續使用饗農購物商城時，即推定您的家長（或監護人）已閱讀、瞭解並同意接受本購物須知之所有內容及其後修改變更。
+        </p>
+      </li>
+      <li>
+        <p>
+          當您使用或繼續使用饗農購物商城時，即表示您同意以電子文件作為意思表示之方法。
+        </p>
+      </li>
+      <li>
+        <p>
+          請注意，當您訂購多筆商品並選擇以信用卡或信用卡分期付款時，饗農購物商城將就各筆訂單分別向銀行取得授權，並非代表您已經付款，也不代表交易已經完成或契約已經成立，饗農購物商城仍須確認交易條件無誤、商品仍有庫存或服務仍可提供，且無其他饗農購物商城無法接受訂單之情形。於確認無上述問題前，饗農購物商城不會請領信用卡交易款項，該筆交易金額也不諱出現在您的信用卡帳單中，直到饗農股份有限公司確認接受訂單為止。如因信用卡額度不足或系統因素等問題，導致發生當次訂購之商品無法全部取得銀行授權之情形，饗農購物商城將會就已成功取得授權部分之商品繼續處理您的訂單，若您就其他商品仍有需要時，請重新訂購。但若當次訂購享有跨產品優惠、滿額 / 滿件優惠者， 饗農購物商城將視為授權全部失敗，請您重新選擇付款方式。另外，使用信用卡分期付款，該服務係由您的信用卡發卡機構提供，債權債務關係係存在您與信用卡發卡機構間，除相關網頁有特別標示外，其所支付之利息、計算方式、是否另有信用保險或保證人之設定或涉入，均依據您與信用卡發卡機構間之相關約定內容辦理，請您自行查閱並注意與信用卡發卡機構間之相關約定。
+        </p>
+      </li>
+      <li>
+        <p>
+          本購物須知是饗農股份有限公司服務條款的補充條款，當您使用饗農購物商城時，即表示您已閱讀、瞭解並同意接受本購物須知所訂之所有內容。本須知得隨時修訂並公告於饗農購物商城上，修訂後之內容自公告時起生效。
+        </p>
+      </li>
+
+    </ol>
+    </div>
+
+  </div>
 </template>
 
 <style lang="scss" scoped>
@@ -268,7 +270,7 @@ input[type='number']::-webkit-inner-spin-button {
 }
 input[type='number'] {
   -moz-appearance: textfield;
-  appearance:textfield;
+  appearance: textfield;
 }
 
 .step {
@@ -288,19 +290,31 @@ input[type='number'] {
     }
   }
 }
+
+.goshop-btn {
+  background-color: #460303;
+  color: #fde47f;
+  transition: 0.2s;
+  &:hover {
+    background-color: #fde47f;
+    color: #460303;
+    transition: 0.2s;
+  }
+}
+
 .cart-img {
   width: 160px;
-  height:120px;
+  height: 120px;
   object-fit: cover;
-  @include xl{
+  @include xl {
     width: 100%;
     height: 100px;
   }
-  @include lg{
+  @include lg {
     width: 100%;
     height: 80px;
   }
-  @include md{
+  @include md {
     width: 100%;
     height: 120px;
   }
@@ -314,12 +328,6 @@ input[type='number'] {
 .step-line {
   width: 48px;
   outline: 0.1px solid #460303;
-}
-.bread-mt {
-  margin-top: 82px;
-  @include lg {
-    margin-top: 88px;
-  }
 }
 
 .cart-delete-btn {
