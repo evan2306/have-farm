@@ -1,12 +1,8 @@
-<script setup></script>
+<script setup>
+import BreadCrumb from '@/components/BreadCrumb.vue';
+</script>
 <template>
-  <div class="bread-mt container-lg pt-16">
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item" aria-current="page">\關於品牌</li>
-      </ol>
-    </nav>
-  </div>
+  <BreadCrumb/>
   <div class="bg-maingray">
     <section class="container-lg pt-48 pb-64">
       <h2 class="text-center fs-32 lh-base text-mainred fw-bold">品牌故事</h2>
@@ -95,12 +91,6 @@
   </section>
 </template>
 <style lang="scss" scoped>
-.bread-mt {
-  margin-top: 82px;
-  @include lg {
-    margin-top: 88px;
-  }
-}
 .map-img {
   max-width: 100%;
   object-fit: cover;
