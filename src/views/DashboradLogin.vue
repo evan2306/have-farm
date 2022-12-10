@@ -31,7 +31,7 @@ onMounted(() => {
 });
 </script>
 <template>
-  <div class="w-100 login-bg">
+  <div class="w-100 login-bg" @keyup.enter="login">
     <div class="container-lg h-100">
       <div
         class="
@@ -55,7 +55,7 @@ onMounted(() => {
           "
         >
           <h1 class="mb-24">後台登入</h1>
-          <div class="mb-3 w-75">
+          <div class="mb-3 w-75" >
             <label for="exampleFormControlInput1" class="form-label"
               >帳號</label
             >
@@ -74,12 +74,14 @@ onMounted(() => {
               class="form-control"
               id="adminLoginPassword"
               v-model="user.password"
+
             />
           </div>
           <button
             type="button"
             class="btn btn-mainred text-white fw-bold px-5 mb-32"
             @click="login"
+
           >
             登入
           </button>
