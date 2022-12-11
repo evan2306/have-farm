@@ -1,11 +1,10 @@
 <script setup>
-import { } from 'vue';
+import {} from 'vue';
 import { storeToRefs } from 'pinia';
 import { useDataStore } from '../stores/saveData';
 
 const dataStore = useDataStore();
 const { navbarCartItemQty } = storeToRefs(dataStore);
-
 </script>
 <template>
   <div class="container-lg">
@@ -77,7 +76,7 @@ const { navbarCartItemQty } = storeToRefs(dataStore);
             </li>
             <li class="nav-item">
               <router-link
-                to="/farmcart"
+                :to="{ name: '購物車' }"
                 class="
                   nav-link
                   navbtn
@@ -97,13 +96,14 @@ const { navbarCartItemQty } = storeToRefs(dataStore);
                     badge
                     rounded-pill
                     bg-danger
-                    d-none
-                    d-lg-block
+                    d-none d-lg-block
                   "
-                  v-if="navbarCartItemQty>0"
+                  v-if="navbarCartItemQty > 0"
                 >
-                <span v-if="navbarCartItemQty<100">{{navbarCartItemQty}}</span>
-                <span v-if="navbarCartItemQty>100">99+</span>
+                  <span v-if="navbarCartItemQty < 100">{{
+                    navbarCartItemQty
+                  }}</span>
+                  <span v-if="navbarCartItemQty > 100">99+</span>
 
                   <span class="visually-hidden">unread messages</span>
                 </span>

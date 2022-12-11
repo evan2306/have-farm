@@ -39,8 +39,7 @@ const newsData = reactive([
 ]);
 </script>
 <template>
-
-  <BreadCrumb/>
+  <BreadCrumb />
   <div class="bread-mt container-lg pt-16">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
@@ -147,7 +146,10 @@ const newsData = reactive([
                 <p class="card-text news-text">
                   {{ news.describe }}
                 </p>
-                <router-link to="/" class="text-decoration-none stretched-link">
+                <router-link
+                  :to="{ name: '首頁' }"
+                  class="text-decoration-none stretched-link"
+                >
                 </router-link>
               </div>
             </div>

@@ -2,7 +2,7 @@
 import BreadCrumb from '@/components/BreadCrumb.vue';
 </script>
 <template>
-  <BreadCrumb/>
+  <BreadCrumb />
   <div class="bg-maingray">
     <section class="container-lg pt-48 pb-64">
       <h2 class="text-center fs-32 lh-base text-mainred fw-bold">品牌故事</h2>
@@ -83,7 +83,9 @@ import BreadCrumb from '@/components/BreadCrumb.vue';
         與小農直接合作，配合專業冷藏冷凍物流<br />把你平常拿不到的新鮮，直接寄給你
       </h4>
       <div class="w-100 d-flex justify-content-center mt-64">
-        <router-link to="/farmshop" class="goshop-btn btn py-8 px-48 fw-bold"
+        <router-link
+          :to="{ name: '響農商城' }"
+          class="goshop-btn btn py-8 px-48 fw-bold"
           >前往商城</router-link
         >
       </div>
