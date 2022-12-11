@@ -18,24 +18,32 @@ export function useCartApi() {
         );
       cartData.value = res.data.data;
       navbarCartItemQty.value = res.data.data.carts.length;
+      console.log(res);
     } catch (error) {
       console.log(error);
     }
-    // axios
-    //   .get(
-    //     `${import.meta.env.VITE_APP_URL}api/${
-    //       import.meta.env.VITE_APP_PATH
-    //     }/cart`,
-    //   )
-    //   .then((res) => {
-    //     cartData.value = res.data.data;
-    //     navbarCartItemQty.value = res.data.data.carts.length;
-    //     console.log('getCartData');
-    //   });
   };
 
+  const updateCartData = async (id, qty) => {
+    const data = {
+      data: {
+        product_id: id,
+        qty,
+      },
+    };
+    try {
+      const res = await axios
+        .put(`${import.meta.env.VITE_APP_URL}api/${
+          import.meta.env.VITE_APP_PATH
+        }/cart/${id}`, data);
+      await getCartData();
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return {
     cartData,
     getCartData,
+    updateCartData,
   };
 }
