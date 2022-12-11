@@ -69,6 +69,11 @@ const router = createRouter({
       ],
     },
     {
+      path: '/order',
+      name: '結帳',
+      component: () => import('../views/FarmOrder.vue'),
+    },
+    {
       path: '/adminlogin',
       name: '後台登入',
       component: () => import('../views/DashboradLogin.vue'),
