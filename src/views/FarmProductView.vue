@@ -1,6 +1,6 @@
 <!-- 商品頁面 -->
 <script setup>
-
+import BreadCrumb from '@/components/BreadCrumb.vue';
 import { onMounted, ref } from 'vue';
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
@@ -72,6 +72,7 @@ onMounted(async () => {
 
 <template>
   <div class="container-lg mt-48 mb-80">
+    <BreadCrumb/>
     <div class="row">
       <div class="col-md-5">
         <div class="sticky-top">
