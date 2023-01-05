@@ -1,49 +1,9 @@
 <script setup>
-// import { onMounted, ref } from 'vue';
-// import axios from 'axios';
-// import { useRouter } from 'vue-router';
-// const productList = ref([]);
-
-// const getProduct = () => {
-//   axios
-//     .get(
-//       `${import.meta.env.VITE_APP_URL}api/${
-//         import.meta.env.VITE_APP_PATH
-//       }/admin/products/all`,
-//     )
-//     .then((res) => {
-//       console.log(res.data);
-//       productList.value = res.data;
-//       console.log('productList.value', productList.value);
-//     });
-// };
-
-// const checkLogin = () => {
-//   const token = document.cookie.replace(
-//     // eslint-disable-next-line no-useless-escape
-//     /(?:(?:^|.*;\s*)havefarmToken\s*\=\s*([^;]*).*$)|^.*$/,
-//     '$1',
-//   );
-//   axios.defaults.headers.common.Authorization = token;
-//   axios
-//     .post(`${import.meta.env.VITE_APP_URL}api/user/check`)
-//     .then(() => {
-//       getProduct();
-//     })
-//     .catch(() => {
-//       alert('請重新登入');
-//       // router.push({ path: '/adminlogin' });
-//     });
-// };
-
-// onMounted(() => {
-//   // checkLogin();
-// });
 </script>
 <template>
   <div class="mb-64"></div>
   <nav class="fixed-top navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
+    <div class="container-lg">
       <a class="navbar-brand" href="#">Navbar</a>
       <button
         class="navbar-toggler"

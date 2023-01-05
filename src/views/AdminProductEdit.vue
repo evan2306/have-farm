@@ -45,7 +45,7 @@ onMounted(() => {
 </script>
 <template>
   <ProductModal ref="isProductModal" @update-product="updateProduct"/>
-  <div class="container-xxl">
+  <div class="container-lg">
     <div class="row justify-content-end mb-3">
       <div class="col-2">
         <button

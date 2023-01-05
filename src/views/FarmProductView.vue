@@ -332,7 +332,7 @@ onMounted(async () => {
   height: 100%;
 }
 
-.swiper-slide {
+:deep(.swiper-slide) {
   text-align: center;
   font-size: 18px;
   background: #fff;
@@ -352,36 +352,36 @@ onMounted(async () => {
   align-items: center;
 }
 
-.swiper {
+:deep(.swiper ){
   width: 100%;
   height: 300px;
   margin-left: auto;
   margin-right: auto;
 }
 
-.swiper-slide {
+:deep(.swiper-slide) {
   background-size: cover;
   background-position: center;
 }
 
-.mySwiper2 {
+:deep(.mySwiper2) {
   height: 80%;
   width: 100%;
 }
 
-.mySwiper {
+:deep(.mySwiper) {
   height: 20%;
   box-sizing: border-box;
   padding: 10px 0;
 }
 
-.mySwiper .swiper-slide {
+:deep(.mySwiper) .swiper-slide {
   width: 25%;
   height: 100%;
   opacity: 0.4;
 }
 
-.mySwiper .swiper-slide-thumb-active {
+:deep(.mySwiper) .swiper-slide-thumb-active {
   opacity: 1;
 }
 
