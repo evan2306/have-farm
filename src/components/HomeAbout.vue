@@ -3,6 +3,7 @@
   <footer class="bg-maingray">
     <section class="container-lg py-64">
       <div class="row">
+        <a href="https://ghg-landing.sustaihub.com/#form"></a>
         <div class="col-12 col-sm-6 col-lg-5 offset-lg-2">
           <img
             class="img-fluid"
