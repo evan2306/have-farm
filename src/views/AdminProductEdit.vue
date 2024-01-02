@@ -41,10 +41,9 @@ const updateProduct = (product, isNewOrEdit) => {
 onMounted(() => {
   creatProductModal();
 });
-
 </script>
 <template>
-  <ProductModal ref="isProductModal" @update-product="updateProduct"/>
+  <ProductModal ref="isProductModal" @update-product="updateProduct" />
   <div class="container-lg">
     <div class="row justify-content-end mb-3">
       <div class="col-2">
@@ -74,7 +73,7 @@ onMounted(() => {
           <th scope="row" class="">
             {{ idx + 1 }}
           </th>
-          <td><img :src="item.imgUrl" alt="" class="itemimg" /> </td>
+          <td><img :src="item.imgUrl" alt="" class="itemimg" /></td>
           <td class="">
             <span class="table-word-overflow text-start fw-bold">{{
               item.title
@@ -85,13 +84,7 @@ onMounted(() => {
           <td>{{ item.is_enabled }}</td>
           <td>
             <div
-              class="
-                d-flex
-                justify-content-around
-                align-items-center
-                flex-wrap
-                gap-1
-              "
+              class="d-flex justify-content-around align-items-center flex-wrap gap-1"
             >
               <button
                 type="button"
@@ -100,15 +93,22 @@ onMounted(() => {
               >
                 編輯
               </button>
-              <button type="button"
-              class="btn btn-outline-danger"
-              @click="deleteAction(item)">刪除</button>
+              <button
+                type="button"
+                class="btn btn-outline-danger"
+                @click="deleteAction(item)"
+              >
+                刪除
+              </button>
             </div>
           </td>
         </tr>
       </tbody>
     </table>
-    <ProductPagination :pages="pagination" @get-product="getProduct"></ProductPagination>
+    <ProductPagination
+      :pages="pagination"
+      @get-product="getProduct"
+    ></ProductPagination>
   </div>
 </template>
 
