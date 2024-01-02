@@ -1,20 +1,30 @@
 <script setup>
-import BreadCrumb from '@/components/BreadCrumb.vue';
-import axios from 'axios';
 import { onMounted, ref } from 'vue';
+import { useLoadingStateStore } from '@/stores/loadingState';
+import axios from 'axios';
+import { storeToRefs } from 'pinia';
+import BreadCrumb from '@/components/BreadCrumb.vue';
+import LoadingPage from '@/components/LoadingPage.vue';
 
+const store = useLoadingStateStore();
+const { changeLoadingState } = store;
+const { LOADING_STATE } = storeToRefs(store);
 const product = ref([]);
 
-const getProduct = () => {
-  axios
-    .get(
+const getProduct = async () => {
+  changeLoadingState(true);
+  try {
+    const res = await axios.get(
       `${import.meta.env.VITE_APP_URL}api/${
         import.meta.env.VITE_APP_PATH
       }/products/all`,
-    )
-    .then((res) => {
-      product.value = res.data.products;
-    });
+    );
+    product.value = res.data.products;
+  } catch (error) {
+    console.log(error);
+  } finally {
+    changeLoadingState(false);
+  }
 };
 
 onMounted(() => {
@@ -22,8 +32,10 @@ onMounted(() => {
 });
 </script>
 <template>
-  <BreadCrumb/>
+  <BreadCrumb />
   <main>
+    <!-- {{ LOADING_STATE }} -->
+    <LoadingPage v-if="LOADING_STATE" />
     <div class="container-lg">
       <ul class="nav nav-tabs d-flex justify-content-center text-center w-100">
         <li class="nav-item w-25">
@@ -35,25 +47,53 @@ onMounted(() => {
           >
         </li>
         <li class="nav-item w-25 nav-border rounded-top-4">
-          <a class="nav-link" href="#">精選熱銷</a>
+          <a
+            class="nav-link"
+            href="#"
+            >精選熱銷</a
+          >
         </li>
         <li class="nav-item w-25 nav-border rounded-top-4">
-          <a class="nav-link" href="#">季節商品</a>
+          <a
+            class="nav-link"
+            href="#"
+            >季節商品</a
+          >
         </li>
         <li class="nav-item w-25 nav-border rounded-top-4">
-          <a class="nav-link" href="#">米麥產品</a>
+          <a
+            class="nav-link"
+            href="#"
+            >米麥產品</a
+          >
         </li>
         <li class="nav-item w-25 nav-border rounded-top-4">
-          <a class="nav-link" href="#">蔬果產品</a>
+          <a
+            class="nav-link"
+            href="#"
+            >蔬果產品</a
+          >
         </li>
         <li class="nav-item w-25 nav-border rounded-top-4">
-          <a class="nav-link" href="#">肉類產品</a>
+          <a
+            class="nav-link"
+            href="#"
+            >肉類產品</a
+          >
         </li>
         <li class="nav-item w-25 nav-border rounded-top-4">
-          <a class="nav-link" href="#">乳蛋產品</a>
+          <a
+            class="nav-link"
+            href="#"
+            >乳蛋產品</a
+          >
         </li>
         <li class="nav-item w-25 nav-border rounded-top-4">
-          <a class="nav-link" href="#">水產產品</a>
+          <a
+            class="nav-link"
+            href="#"
+            >水產產品</a
+          >
         </li>
       </ul>
       <div class="row mt-48 g-24">
@@ -63,14 +103,7 @@ onMounted(() => {
           :key="idx"
         >
           <div
-            class="
-              card
-              border-0
-              rounded-4
-              season-item-card
-              rounded-top-16
-              h-100
-            "
+            class="card border-0 rounded-4 season-item-card rounded-top-16 h-100"
           >
             <div class="card-top w-100 p-16 position-relative">
               <img
@@ -81,12 +114,15 @@ onMounted(() => {
               <div
                 class="position-absolute h-25 top-0 end-0 d-flex flex-column"
               >
-                <span class="badge bg-mainorg card-Badges" v-if="item.is_special==2">
+                <span
+                  class="badge bg-mainorg card-Badges"
+                  v-if="item.is_special == 2"
+                >
                   季節限定
                 </span>
                 <span
                   class="badge bg-success card-Badges"
-                  v-if="item.is_special==1"
+                  v-if="item.is_special == 1"
                 >
                   精選熱銷
                 </span>
@@ -94,7 +130,9 @@ onMounted(() => {
             </div>
 
             <div class="card-body mt-8 px-22 py-0 text-mainred">
-              <h5 class="mb-0 fs-20 lh-base fw-bold item-title">{{ item.title }}</h5>
+              <h5 class="mb-0 fs-20 lh-base fw-bold item-title">
+                {{ item.title }}
+              </h5>
               <p class="fs-16 lh-base mb-8 fw-bold">{{ item.farm }}</p>
               <p class="fs-20 lh-base mb-8 fw-bold text-end">
                 NT${{ item.price }}/ <span class="fs-14">{{ item.unit }}</span>
@@ -104,17 +142,7 @@ onMounted(() => {
               <router-link
                 :to="`/farmshop/${item.id}`"
                 type="button"
-                class="
-                  w-100
-                  border-0
-                  py-16
-                  fs-16
-                  lh-base
-                  rounded-bottom-16
-                  fw-bold
-                  goshop-btn
-                  stretched-link
-                "
+                class="w-100 border-0 py-16 fs-16 lh-base rounded-bottom-16 fw-bold goshop-btn stretched-link"
                 :disabled="!item.is_enabled"
               >
                 立即購買
@@ -129,21 +157,41 @@ onMounted(() => {
     <nav aria-label="Page navigation ">
       <ul class="pagination mb-0">
         <li class="page-item">
-          <a class="page-link text-mainred" href="#" aria-label="Previous">
+          <a
+            class="page-link text-mainred"
+            href="#"
+            aria-label="Previous"
+          >
             <span aria-hidden="true">&laquo;</span>
           </a>
         </li>
         <li class="page-item">
-          <a class="page-link text-mainred" href="#">1</a>
+          <a
+            class="page-link text-mainred"
+            href="#"
+            >1</a
+          >
         </li>
         <li class="page-item">
-          <a class="page-link text-mainred" href="#">2</a>
+          <a
+            class="page-link text-mainred"
+            href="#"
+            >2</a
+          >
         </li>
         <li class="page-item">
-          <a class="page-link text-mainred" href="#">3</a>
+          <a
+            class="page-link text-mainred"
+            href="#"
+            >3</a
+          >
         </li>
         <li class="page-item">
-          <a class="page-link text-mainred" href="#" aria-label="Next">
+          <a
+            class="page-link text-mainred"
+            href="#"
+            aria-label="Next"
+          >
             <span aria-hidden="true">&raquo;</span>
           </a>
         </li>
@@ -152,7 +200,7 @@ onMounted(() => {
   </section>
 </template>
 <style lang="scss" scoped>
-.item-title{
+.item-title {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
