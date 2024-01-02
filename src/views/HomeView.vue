@@ -5,7 +5,6 @@ import HomeHotItem from '@/components/HomeHotItem.vue';
 import HomeSeasonItem from '@/components/HomeSeasonItem.vue';
 import HomeAbout from '@/components/HomeAbout.vue';
 import HomeSubscrip from '@/components/HomeSubscrip.vue';
-
 </script>
 <template>
   <HomeBanner />
@@ -14,7 +13,6 @@ import HomeSubscrip from '@/components/HomeSubscrip.vue';
   <HomeSeasonItem />
   <HomeAbout />
   <HomeSubscrip />
-
 </template>
 
 <style lang="scss" scoped></style>

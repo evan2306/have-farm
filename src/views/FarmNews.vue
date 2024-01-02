@@ -43,80 +43,51 @@ const newsData = reactive([
   <div class="bread-mt container-lg pt-16">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
-        <li class="breadcrumb-item" aria-current="page">首頁>最新消息</li>
+        <li
+          class="breadcrumb-item"
+          aria-current="page"
+        >
+          首頁>最新消息
+        </li>
       </ol>
     </nav>
   </div>
   <div class="container-lg">
     <div class="row pt-16">
       <div
-        class="
-          col-12 col-lg-3
-          d-flex
-          flex-lg-column
-          justify-content-lg-start justify-content-around
-          align-items-lg-center
-        "
+        class="col-12 col-lg-3 d-flex flex-lg-column justify-content-lg-start justify-content-around align-items-lg-center"
       >
         <button
           type="buttn"
-          class="
-            btn btn-outline-mainorg
-            w-lg-100
-            mb-16
-            fs-16 fs-sm-20
-            lh-base
-            fw-bold
-            list-btn list-btn-active
-          "
+          class="btn btn-outline-mainorg w-lg-100 mb-16 fs-16 fs-sm-20 lh-base fw-bold list-btn list-btn-active"
         >
           全部消息
         </button>
         <button
           type="buttn"
-          class="
-            btn btn-outline-mainorg
-            w-lg-100
-            mb-16
-            fs-16 fs-sm-20
-            lh-base
-            fw-bold
-            list-btn
-          "
+          class="btn btn-outline-mainorg w-lg-100 mb-16 fs-16 fs-sm-20 lh-base fw-bold list-btn"
         >
           重要公告
         </button>
         <button
           type="buttn"
-          class="
-            btn btn-outline-mainorg
-            w-lg-100
-            mb-16
-            fs-16 fs-sm-20
-            lh-base
-            fw-bold
-            list-btn
-          "
+          class="btn btn-outline-mainorg w-lg-100 mb-16 fs-16 fs-sm-20 lh-base fw-bold list-btn"
         >
           活動訊息
         </button>
         <button
           type="buttn"
-          class="
-            btn btn-outline-mainorg
-            w-lg-100
-            mb-16
-            fs-16 fs-sm-20
-            lh-base
-            fw-bold
-            list-btn
-          "
+          class="btn btn-outline-mainorg w-lg-100 mb-16 fs-16 fs-sm-20 lh-base fw-bold list-btn"
         >
           新品資訊
         </button>
       </div>
       <div class="col-12 col-lg-9">
-        <div class="card mb-3" v-for="news in newsData" :key="news.title">
+        <div
+          class="card mb-3"
+          v-for="news in newsData"
+          :key="news.title"
+        >
           <div class="row g-0">
             <div class="col-md-4">
               <div class="w-100">
@@ -130,13 +101,7 @@ const newsData = reactive([
             <div class="col-md-8 position-relative">
               <div class="card-body">
                 <div
-                  class="
-                    d-flex
-                    justify-content-between
-                    mb-8
-                    text-center text-mainred
-                    align-items-center
-                  "
+                  class="d-flex justify-content-between mb-8 text-center text-mainred align-items-center"
                 >
                   <h5 class="fs-20 lh-base me-3 mb-0 fw-bolder">
                     {{ news.title }}

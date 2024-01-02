@@ -10,17 +10,15 @@ export function useCartApi() {
 
   const getCartData = async () => {
     try {
-      const res = await axios
-        .get(
-          `${import.meta.env.VITE_APP_URL}api/${
-            import.meta.env.VITE_APP_PATH
-          }/cart`,
-        );
+      const res = await axios.get(
+        `${import.meta.env.VITE_APP_URL}api/${
+          import.meta.env.VITE_APP_PATH
+        }/cart`,
+      );
       cartData.value = res.data.data;
       navbarCartItemQty.value = res.data.data.carts.length;
-      console.log(res);
     } catch (error) {
-      console.log(error);
+      console.err(error);
     }
   };
 
@@ -32,10 +30,12 @@ export function useCartApi() {
       },
     };
     try {
-      const res = await axios
-        .put(`${import.meta.env.VITE_APP_URL}api/${
+      const res = await axios.put(
+        `${import.meta.env.VITE_APP_URL}api/${
           import.meta.env.VITE_APP_PATH
-        }/cart/${id}`, data);
+        }/cart/${id}`,
+        data,
+      );
       await getCartData();
     } catch (error) {
       console.log(error);

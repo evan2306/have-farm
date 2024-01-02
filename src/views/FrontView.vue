@@ -1,9 +1,8 @@
 <script setup>
+import { onMounted, onUpdated } from 'vue';
+import { useCartApi } from '@/composables/useCartApi';
 import LayoutNavbar from '@/components/LayoutNavbar.vue';
 import LayoutFooter from '@/components/LayoutFooter.vue';
-import { onMounted, onUpdated } from 'vue';
-
-import { useCartApi } from '../composables/useCartApi';
 
 const { getCartData } = useCartApi();
 onMounted(() => {
@@ -12,7 +11,6 @@ onMounted(() => {
 onUpdated(() => {
   getCartData();
 });
-
 </script>
 <template>
   <LayoutNavbar />
