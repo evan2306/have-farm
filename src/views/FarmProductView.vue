@@ -7,7 +7,7 @@ import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
-import { FreeMode, Navigation, Thumbs } from 'swiper';
+import { FreeMode, Navigation, Thumbs } from 'swiper/modules';
 
 import { storeToRefs } from 'pinia';
 import { useCartApi } from '../composables/useCartApi';
@@ -83,7 +83,7 @@ onMounted(async () => {
             }"
             :spaceBetween="10"
             :navigation="true"
-            :thumbs="{ swiper: thumbsSwiper }"
+            :thumbs="{ swiper: thumbsSwiper && !thumbsSwiper.destroyed ? thumbsSwiper : null }"
             :modules="modules"
             class="mySwiper2"
           >
